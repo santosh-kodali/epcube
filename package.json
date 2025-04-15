@@ -9,7 +9,7 @@
     "energy",
     "integration"
   ],
-  "main": "src/main.js",
+  "main": "sensor.py",
   "repository": "git@github.com:bobsilvio/epcube-homeassistant.git",
   "author": "Silvio Vaira <silvio.vaira@gmail.com>",
   "license": "MIT",
