@@ -1,0 +1,15 @@
+{
+  "domain": "epcube",
+  "name": "EP CUBE Energy Monitor",
+  "version": "1.0.0",
+  "documentation": "https://github.com/Bobsilvio/epcube-homeassistant/",
+  "dependencies": [],
+  "codeowners": ["@Bobsilvio"],
+  "requirements": [],
+  "iot_class": "cloud_polling",
+  "config_flow": true,
+  "zeroconf": [],
+  "devices": [],
+  "loggers": ["epcube"],
+  "homeassistant": "2023.4.0"
+}

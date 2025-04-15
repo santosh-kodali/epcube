@@ -1,0 +1,15 @@
+
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure EpCube",
+        "data": {
+          "token": "Bearer Token",
+          "sn": "Serial Number",
+          "scan_interval": "Polling interval (seconds)"
+        }
+      }
+    }
+  }
+}
