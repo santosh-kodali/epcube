@@ -5,7 +5,7 @@
   "main": "sensor.py",
   "repository": {
     "type": "git",
-    "url": https://github.com/Bobsilvio/epcube-homeassistant"
+    "url": "https://github.com/Bobsilvio/epcube-homeassistant"
   },
   "keywords": [
     "home-assistant",
