@@ -40,6 +40,35 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         "warrantydata": "Scadenza Garanzia",
         "modeltype": "Modello EP Cube",
         "batterycapacity": "Capacità Batteria",
+        #Nuove
+        "evpower": "Veicolo Elettrico Potenza",
+        "evelectricity": "Veicolo Elettrico Energia",
+        "evflowpower": "Veicolo Elettrico Energia Erogata",
+        "generatorflowpower": "Generatore Energia Erogata",
+        "nonbackupflowpower": "Non Backup Energia Erogata",
+        "evpower": "Veicolo Elettrico Potenza",
+        "generatorelectricity": "Generatore Energia",
+        "generatorpower": "Generatore Potenza",
+        "gridhalfpower": "Rete Potenza Parziale",
+        "gridtotalpower": "Rete Potenza Totale",
+        "nonbackupelectricity": "Non Backup Energia",
+        "nonbackuppower": "Non Backup Potenza",
+        "backuploadsmode": "Modalità Carico Backup",
+        "backuptype": "Tipo Backup",
+        "deftimezone": "Fuso Orario Default",
+        "evlight": "Veicolo Elettrico Stato",
+        "faultwarningtype": "Tipo Allarme",
+        "fromtimezone": "Fuso Orario Attuale",
+        "fromtype": "Tipo Origine",
+        "generatorlight": "Stato Generatore",
+        "gridlight": "Stato Rete",
+        "gridpowerfailurenum": "Errori Alimentazione Rete",
+        "isalert": "Presenza Allarme",
+        "isfault": "Presenza Guasto",
+        "isnewdevice": "Dispositivo Nuovo",
+        "payloadversion": "Versione Payload",
+        "ressnumber": "Numero Batterie",
+        "status": "Stato Generale",
     }
 
     suffix_map = {
@@ -90,17 +119,25 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         "batterycurrentelectricity",
         ]
     
+    # Energia accumulata (kWh)
     kwh_keys = [
-        "backupelectricity", "solarelectricity",
-        "gridelectricity", "generatorelectricity", "evelectricity", "nonbackupelectricity",
+        "backupelectricity", "solarelectricity", "gridelectricity",
+        "generatorelectricity", "evelectricity", "nonbackupelectricity",
         "gridelectricity_annual", "solarelectricity_annual", "backupelectricity_annual",
     ]
+
+    # Flusso energia (kWh, direzionale)
+    flow_kwh_keys = [
+        "evflowpower", "generatorflowpower", "nonbackupflowpower",
+    ]
+    
 
     w_keys = [
         "solardcpower", "solaracpower", "backuppower", "solarpower", "gridpower",
         "generatorpower", "evpower", "nonbackuppower", "gridtotalpower", "gridhalfpower",
         "backupflowpower",
     ]
+    
 
     kw_keys = [
         "solaracelectricity", "solardcelectricity",
@@ -143,6 +180,10 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         
         
         if base_key in [k.lower() for k in kwh_keys]:
+            device_class = SensorDeviceClass.ENERGY
+            unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
+            state_class = SensorStateClass.TOTAL_INCREASING
+        elif base_key in [k.lower() for k in flow_kwh_keys]:
             device_class = SensorDeviceClass.ENERGY
             unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
             state_class = SensorStateClass.TOTAL_INCREASING
