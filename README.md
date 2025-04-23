@@ -12,7 +12,7 @@ Custom Home Assistant integration for monitoring the EP Cube energy storage syst
   - Can be enabled individually or all at once via configuration  
 - ⚙️ Built-in **configuration and diagnostic entities**  
 - 🧩 Fully integrated with Home Assistant UI (config flow, device info, icons)
-- 🔐 Requires a **valid Bearer token** (token generation via reverse engineering is planned)
+- 🔐 Requires a **valid Bearer token** (token generation via reverse engineering, [HERE](https://epcube-token.streamlit.app/))
 
 ---
 
@@ -33,7 +33,7 @@ Custom Home Assistant integration for monitoring the EP Cube energy storage syst
 ## ⚠️ Requirements
 
 - EP Cube account  
-- Bearer token (must be generated manually for now)
+- Bearer token ([HERE](https://github.com/Bobsilvio/epcube-token))
 
 ---
 
