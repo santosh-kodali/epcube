@@ -1,284 +1,253 @@
 {
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "token": "Token EPCUBE"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "token": "Token EPCUBE",
+          "scan_interval": "Frequenza aggiornamento dati",
+          "scale_power": "Moltiplica i valori di potenza (*1000)",
+          "enable_total": "Abilita tutti i sensori totali",
+          "enable_annual": "Abilita tutti i sensori annuali",
+          "enable_monthly": "Abilita tutti i sensori mensili"
+        }
+      }
+    }
+  },
   "entity": {
     "sensor": {
-      "batterysoc": {
-        "name": "Stato Carica Batteria"
-      },
-      "batterysoc_total": {
-        "name": "Stato Carica Batteria (Totale)"
-      },
-      "batterysoc_annual": {
-        "name": "Stato Carica Batteria (Annuale)"
-      },
-      "batterysoc_monthly": {
-        "name": "Stato Carica Batteria (Mensile)"
-      },
-      "batterycurrentelectricity": {
-        "name": "Energia Batteria"
-      },
-      "batterycurrentelectricity_total": {
-        "name": "Energia Batteria (Totale)"
-      },
-      "batterycurrentelectricity_annual": {
-        "name": "Energia Batteria (Annuale)"
-      },
-      "batterycurrentelectricity_monthly": {
-        "name": "Energia Batteria (Mensile)"
-      },
-      "gridpower": {
-        "name": "Potenza Rete"
-      },
-      "gridpower_total": {
-        "name": "Potenza Rete (Totale)"
-      },
-      "gridpower_annual": {
-        "name": "Potenza Rete (Annuale)"
-      },
-      "gridpower_monthly": {
-        "name": "Potenza Rete (Mensile)"
-      },
-      "gridelectricity": {
-        "name": "Energia Rete"
-      },
-      "gridelectricity_total": {
-        "name": "Energia Rete (Totale)"
-      },
-      "gridelectricity_annual": {
-        "name": "Energia Rete (Annuale)"
-      },
-      "gridelectricity_monthly": {
-        "name": "Energia Rete (Mensile)"
-      },
-      "solarpower": {
-        "name": "Potenza Solare"
-      },
-      "solarpower_total": {
-        "name": "Potenza Solare (Totale)"
-      },
-      "solarpower_annual": {
-        "name": "Potenza Solare (Annuale)"
-      },
-      "solarpower_monthly": {
-        "name": "Potenza Solare (Mensile)"
-      },
-      "solarelectricity": {
-        "name": "Energia Solare"
-      },
-      "solarelectricity_total": {
-        "name": "Energia Solare (Totale)"
-      },
-      "solarelectricity_annual": {
-        "name": "Energia Solare (Annuale)"
-      },
-      "solarelectricity_monthly": {
-        "name": "Energia Solare (Mensile)"
-      },
-      "solardcelectricity": {
-        "name": "Energia Solare DC"
-      },
-      "solardcelectricity_total": {
-        "name": "Energia Solare DC (Totale)"
-      },
-      "solardcelectricity_annual": {
-        "name": "Energia Solare DC (Annuale)"
-      },
-      "solardcelectricity_monthly": {
-        "name": "Energia Solare DC (Mensile)"
-      },
-      "solaracelectricity": {
-        "name": "Energia Solare AC"
-      },
-      "solaracelectricity_total": {
-        "name": "Energia Solare AC (Totale)"
-      },
-      "solaracelectricity_annual": {
-        "name": "Energia Solare AC (Annuale)"
-      },
-      "solaracelectricity_monthly": {
-        "name": "Energia Solare AC (Mensile)"
-      },
-      "solardcpower": {
-        "name": "Potenza Solare DC"
-      },
-      "solardcpower_total": {
-        "name": "Potenza Solare DC (Totale)"
-      },
-      "solardcpower_annual": {
-        "name": "Potenza Solare DC (Annuale)"
-      },
-      "solardcpower_monthly": {
-        "name": "Potenza Solare DC (Mensile)"
-      },
-      "solaracpower": {
-        "name": "Potenza Solare AC"
-      },
-      "solaracpower_total": {
-        "name": "Potenza Solare AC (Totale)"
-      },
-      "solaracpower_annual": {
-        "name": "Potenza Solare AC (Annuale)"
-      },
-      "solaracpower_monthly": {
-        "name": "Potenza Solare AC (Mensile)"
-      },
-      "generatorpower": {
-        "name": "Potenza Generatore"
-      },
-      "generatorpower_total": {
-        "name": "Potenza Generatore (Totale)"
-      },
-      "generatorpower_annual": {
-        "name": "Potenza Generatore (Annuale)"
-      },
-      "generatorpower_monthly": {
-        "name": "Potenza Generatore (Mensile)"
-      },
-      "generatorelectricity": {
-        "name": "Energia Generatore"
-      },
-      "generatorelectricity_total": {
-        "name": "Energia Generatore (Totale)"
-      },
-      "generatorelectricity_annual": {
-        "name": "Energia Generatore (Annuale)"
-      },
-      "generatorelectricity_monthly": {
-        "name": "Energia Generatore (Mensile)"
-      },
-      "evpower": {
-        "name": "Potenza Veicolo Elettrico"
-      },
-      "evpower_total": {
-        "name": "Potenza Veicolo Elettrico (Totale)"
-      },
-      "evpower_annual": {
-        "name": "Potenza Veicolo Elettrico (Annuale)"
-      },
-      "evpower_monthly": {
-        "name": "Potenza Veicolo Elettrico (Mensile)"
-      },
-      "evelectricity": {
-        "name": "Energia Veicolo Elettrico"
-      },
-      "evelectricity_total": {
-        "name": "Energia Veicolo Elettrico (Totale)"
-      },
-      "evelectricity_annual": {
-        "name": "Energia Veicolo Elettrico (Annuale)"
-      },
-      "evelectricity_monthly": {
-        "name": "Energia Veicolo Elettrico (Mensile)"
-      },
-      "nonbackuppower": {
-        "name": "Potenza Non Backup"
-      },
-      "nonbackuppower_total": {
-        "name": "Potenza Non Backup (Totale)"
-      },
-      "nonbackuppower_annual": {
-        "name": "Potenza Non Backup (Annuale)"
-      },
-      "nonbackuppower_monthly": {
-        "name": "Potenza Non Backup (Mensile)"
-      },
-      "nonbackupelectricity": {
-        "name": "Energia Non Backup"
-      },
-      "nonbackupelectricity_total": {
-        "name": "Energia Non Backup (Totale)"
-      },
-      "nonbackupelectricity_annual": {
-        "name": "Energia Non Backup (Annuale)"
-      },
-      "nonbackupelectricity_monthly": {
-        "name": "Energia Non Backup (Mensile)"
-      },
-      "backuppower": {
-        "name": "Potenza Backup"
-      },
-      "backuppower_total": {
-        "name": "Potenza Backup (Totale)"
-      },
-      "backuppower_annual": {
-        "name": "Potenza Backup (Annuale)"
-      },
-      "backuppower_monthly": {
-        "name": "Potenza Backup (Mensile)"
-      },
-      "backupelectricity": {
-        "name": "Energia Casa"
-      },
-      "backupelectricity_total": {
-        "name": "Energia Casa (Totale)"
-      },
-      "backupelectricity_annual": {
-        "name": "Energia Casa (Annuale)"
-      },
-      "backupelectricity_monthly": {
-        "name": "Energia Casa (Mensile)"
-      },
-      "selfhelprate": {
-        "name": "Tasso Autoconsumo"
-      },
-      "selfhelprate_total": {
-        "name": "Tasso Autoconsumo (Totale)"
-      },
-      "selfhelprate_annual": {
-        "name": "Tasso Autoconsumo (Annuale)"
-      },
-      "selfhelprate_monthly": {
-        "name": "Tasso Autoconsumo (Mensile)"
-      },
-      "isalert": {
-        "name": "Allarme Presente"
-      },
-      "isalert_total": {
-        "name": "Allarme Presente (Totale)"
-      },
-      "isalert_annual": {
-        "name": "Allarme Presente (Annuale)"
-      },
-      "isalert_monthly": {
-        "name": "Allarme Presente (Mensile)"
-      },
-      "isfault": {
-        "name": "Guasto Presente"
-      },
-      "isfault_total": {
-        "name": "Guasto Presente (Totale)"
-      },
-      "isfault_annual": {
-        "name": "Guasto Presente (Annuale)"
-      },
-      "isfault_monthly": {
-        "name": "Guasto Presente (Mensile)"
-      },
-      "gridpowerfailurenum": {
-        "name": "Interruzioni Rete"
-      },
-      "gridpowerfailurenum_total": {
-        "name": "Interruzioni Rete (Totale)"
-      },
-      "gridpowerfailurenum_annual": {
-        "name": "Interruzioni Rete (Annuale)"
-      },
-      "gridpowerfailurenum_monthly": {
-        "name": "Interruzioni Rete (Mensile)"
-      },
       "devid": {
-        "name": "ID EP Cube"
-      },
-      "devid_total": {
-        "name": "ID EP Cube (Totale)"
-      },
-      "devid_annual": {
-        "name": "ID EP Cube (Annuale)"
-      },
-      "devid_monthly": {
-        "name": "ID EP Cube (Mensile)"
+        "name": "ID EPCUBE"
       },
       "status": {
         "name": "Stato Generale"
+      },
+      "workstatus": {
+        "name": "Stato Lavorativo"
+      },
+      "batterysoc": {
+        "name": "Batteria Soc"
+      },
+      "batterycurrentelectricity": {
+        "name": "Batteria Energia Corrente"
+      },
+      "gridpowerfailurenum": {
+        "name": "Rete Power Fallimento"
+      },
+      "offgridpowersupplytime": {
+        "name": "Offgrid tempo di fornitura energia"
+      },
+      "gridpower": {
+        "name": "Rete Power"
+      },
+      "gridelectricity": {
+        "name": "Rete Energia"
+      },
+      "solarpower": {
+        "name": "Solare Power"
+      },
+      "solarelectricity": {
+        "name": "Solare Energia Totale"
+      },
+      "solardcelectricity": {
+        "name": "Solare DC Energia"
+      },
+      "solaracelectricity": {
+        "name": "Solare AC Energia"
+      },
+      "generatorpower": {
+        "name": "Generatore Power"
+      },
+      "generatorelectricity": {
+        "name": "Generatore Energia"
+      },
+      "evpower": {
+        "name": "Veicolo Elettrico Power"
+      },
+      "evelectricity": {
+        "name": "Veicolo Elettrico Energia"
+      },
+      "nonbackuppower": {
+        "name": "Non Backup Power"
+      },
+      "nonbackupelectricity": {
+        "name": "Non Backup Energia"
+      },
+      "backuppower": {
+        "name": "Casa Power"
+      },
+      "backupelectricity": {
+        "name": "Casa Energia"
+      },
+      "selfhelprate": {
+        "name": "Rapporto Contributo EPCUBE"
+      },
+      "isalert": {
+        "name": "In Allerta"
+      },
+      "isfault": {
+        "name": "In Rottura"
+      },
+      "defcreatetime": {
+        "name": "Defcreatetime"
+      },
+      "deftimezone": {
+        "name": "Timezone Coordinate"
+      },
+      "fromcreatetime": {
+        "name": "Fromcreatetime"
+      },
+      "fromtimezone": {
+        "name": "Timezone Locale"
+      },
+      "fromtype": {
+        "name": "Fromtype"
+      },
+      "systemstatus": {
+        "name": "Stato sistema"
+      },
+      "backuptype": {
+        "name": "Casa Backup Tipo"
+      },
+      "gridlight": {
+        "name": "Rete Luce"
+      },
+      "generatorlight": {
+        "name": "Generatore Luce"
+      },
+      "evlight": {
+        "name": "Veicolo Elettrico Luce"
+      },
+      "ressnumber": {
+        "name": "Numero Batterie"
+      },
+      "isnewdevice": {
+        "name": "Nuovo Dispositivo"
+      },
+      "version": {
+        "name": "Versione"
+      },
+      "payloadversion": {
+        "name": "Versione Payload"
+      },
+      "gridtotalpower": {
+        "name": "Rete Power Totale"
+      },
+      "gridhalfpower": {
+        "name": "Rete Metà Power"
+      },
+      "solarflow": {
+        "name": "Solare Flow"
+      },
+      "solaracpower": {
+        "name": "Solare AC Power"
+      },
+      "solardcpower": {
+        "name": "Solare DC Power"
+      },
+      "generatorflowpower": {
+        "name": "Generatore Power Flow"
+      },
+      "evflowpower": {
+        "name": "Veicolo Elettrico Power Flow"
+      },
+      "nonbackupflowpower": {
+        "name": "Non Backup Power Flow"
+      },
+      "backupflowpower": {
+        "name": "Casa Power Flow"
+      },
+      "backuploadsmode": {
+        "name": "Casa Modalità Caricamento"
+      },
+      "faultwarningtype": {
+        "name": "Faultwarningtype"
+      },
+      "off_on_grid_hint": {
+        "name": "Off On Grid Hint"
+      },
+      "weatherwatch": {
+        "name": "Weatherwatch"
+      },
+      "onlysave": {
+        "name": "Onlysave"
+      },
+      "backuppowerreservesoc": {
+        "name": "Casa Riserva Power Soc"
+      },
+      "selfconsumptioinreservesoc": {
+        "name": "Autoconsumo Riserva Soc"
+      },
+      "allowchargingxiagrid": {
+        "name": "Consenti la ricarica dalla Rete"
+      },
+      "activeweek": {
+        "name": "Settimane di attività"
+      },
+      "activeweeknonworkday": {
+        "name": "Settimane di non attività"
+      },
+      "daylightsavingtime": {
+        "name": "Daylightsavingtime"
+      },
+      "daylightactiveweek": {
+        "name": "Daylightactiveweek"
+      },
+      "daylightactiveweeknonworkday": {
+        "name": "Daylightactiveweeknonworkday"
+      },
+      "evchargerreservesoc": {
+        "name": "Veicolo Elettrico Batteria di riserva Soc"
+      },
+      "daytype": {
+        "name": "Daytype"
+      },
+      "isdaylightsaving": {
+        "name": "Isdaylightsaving"
+      },
+      "activationdata": {
+        "name": "Data Attivazione"
+      },
+      "warrantydata": {
+        "name": "Scadenza Garanzia"
+      },
+      "modeltype": {
+        "name": "Modello EPCUBE"
+      },
+      "batterycapacity": {
+        "name": "Batteria Capacità"
+      },
+      "gridelectricityfrom": {
+        "name": "Rete Electricityfrom"
+      },
+      "gridelectricityto": {
+        "name": "Rete Energia Prelevata"
+      },
+      "treenum": {
+        "name": "Alberi Salvati"
+      },
+      "coal": {
+        "name": "Carbone Risparmiato"
+      },
+      "hasvalue": {
+        "name": "Ha Valore"
+      },
+      "devid_total": {
+        "name": "ID EPCUBE (Totale)"
+      },
+      "devid_annual": {
+        "name": "ID EPCUBE (Annuale)"
+      },
+      "devid_monthly": {
+        "name": "ID EPCUBE (Mensile)"
       },
       "status_total": {
         "name": "Stato Generale (Totale)"
@@ -289,140 +258,293 @@
       "status_monthly": {
         "name": "Stato Generale (Mensile)"
       },
-      "workstatus": {
-        "name": "Stato Lavoro"
-      },
       "workstatus_total": {
-        "name": "Stato Lavoro (Totale)"
+        "name": "Stato Lavorativo (Totale)"
       },
       "workstatus_annual": {
-        "name": "Stato Lavoro (Annuale)"
+        "name": "Stato Lavorativo (Annuale)"
       },
       "workstatus_monthly": {
-        "name": "Stato Lavoro (Mensile)"
+        "name": "Stato Lavorativo (Mensile)"
       },
-      "defcreatetime": {
-        "name": "Data Creazione Predefinita"
+      "batterysoc_total": {
+        "name": "Batteria Soc (Totale)"
+      },
+      "batterysoc_annual": {
+        "name": "Batteria Soc (Annuale)"
+      },
+      "batterysoc_monthly": {
+        "name": "Batteria Soc (Mensile)"
+      },
+      "batterycurrentelectricity_total": {
+        "name": "Batteria Energia Corrente (Totale)"
+      },
+      "batterycurrentelectricity_annual": {
+        "name": "Batteria Energia Corrente (Annuale)"
+      },
+      "batterycurrentelectricity_monthly": {
+        "name": "Batteria Energia Corrente (Mensile)"
+      },
+      "gridpowerfailurenum_total": {
+        "name": "Rete Power Fallimento (Totale)"
+      },
+      "gridpowerfailurenum_annual": {
+        "name": "Rete Power Fallimento (Annuale)"
+      },
+      "gridpowerfailurenum_monthly": {
+        "name": "Rete Power Fallimento (Mensile)"
+      },
+      "offgridpowersupplytime_total": {
+        "name": "Offgrid tempo di fornitura energia (Totale)"
+      },
+      "offgridpowersupplytime_annual": {
+        "name": "Offgrid tempo di fornitura energia (Annuale)"
+      },
+      "offgridpowersupplytime_monthly": {
+        "name": "Offgrid tempo di fornitura energia (Mensile)"
+      },
+      "gridpower_total": {
+        "name": "Rete Power (Totale)"
+      },
+      "gridpower_annual": {
+        "name": "Rete Power (Annuale)"
+      },
+      "gridpower_monthly": {
+        "name": "Rete Power (Mensile)"
+      },
+      "gridelectricity_total": {
+        "name": "Rete Energia (Totale)"
+      },
+      "gridelectricity_annual": {
+        "name": "Rete Energia (Annuale)"
+      },
+      "gridelectricity_monthly": {
+        "name": "Rete Energia (Mensile)"
+      },
+      "solarpower_total": {
+        "name": "Solare Power (Totale)"
+      },
+      "solarpower_annual": {
+        "name": "Solare Power (Annuale)"
+      },
+      "solarpower_monthly": {
+        "name": "Solare Power (Mensile)"
+      },
+      "solarelectricity_total": {
+        "name": "Solare Energia Totale (Totale)"
+      },
+      "solarelectricity_annual": {
+        "name": "Solare Energia Totale (Annuale)"
+      },
+      "solarelectricity_monthly": {
+        "name": "Solare Energia Totale (Mensile)"
+      },
+      "solardcelectricity_total": {
+        "name": "Solare DC Energia (Totale)"
+      },
+      "solardcelectricity_annual": {
+        "name": "Solare DC Energia (Annuale)"
+      },
+      "solardcelectricity_monthly": {
+        "name": "Solare DC Energia (Mensile)"
+      },
+      "solaracelectricity_total": {
+        "name": "Solare AC Energia (Totale)"
+      },
+      "solaracelectricity_annual": {
+        "name": "Solare AC Energia (Annuale)"
+      },
+      "solaracelectricity_monthly": {
+        "name": "Solare AC Energia (Mensile)"
+      },
+      "generatorpower_total": {
+        "name": "Generatore Power (Totale)"
+      },
+      "generatorpower_annual": {
+        "name": "Generatore Power (Annuale)"
+      },
+      "generatorpower_monthly": {
+        "name": "Generatore Power (Mensile)"
+      },
+      "generatorelectricity_total": {
+        "name": "Generatore Energia (Totale)"
+      },
+      "generatorelectricity_annual": {
+        "name": "Generatore Energia (Annuale)"
+      },
+      "generatorelectricity_monthly": {
+        "name": "Generatore Energia (Mensile)"
+      },
+      "evpower_total": {
+        "name": "Veicolo Elettrico Power (Totale)"
+      },
+      "evpower_annual": {
+        "name": "Veicolo Elettrico Power (Annuale)"
+      },
+      "evpower_monthly": {
+        "name": "Veicolo Elettrico Power (Mensile)"
+      },
+      "evelectricity_total": {
+        "name": "Veicolo Elettrico Energia (Totale)"
+      },
+      "evelectricity_annual": {
+        "name": "Veicolo Elettrico Energia (Annuale)"
+      },
+      "evelectricity_monthly": {
+        "name": "Veicolo Elettrico Energia (Mensile)"
+      },
+      "nonbackuppower_total": {
+        "name": "Non Backup Power (Totale)"
+      },
+      "nonbackuppower_annual": {
+        "name": "Non Backup Power (Annuale)"
+      },
+      "nonbackuppower_monthly": {
+        "name": "Non Backup Power (Mensile)"
+      },
+      "nonbackupelectricity_total": {
+        "name": "Non Backup Energia (Totale)"
+      },
+      "nonbackupelectricity_annual": {
+        "name": "Non Backup Energia (Annuale)"
+      },
+      "nonbackupelectricity_monthly": {
+        "name": "Non Backup Energia (Mensile)"
+      },
+      "backuppower_total": {
+        "name": "Casa Power (Totale)"
+      },
+      "backuppower_annual": {
+        "name": "Casa Power (Annuale)"
+      },
+      "backuppower_monthly": {
+        "name": "Casa Power (Mensile)"
+      },
+      "backupelectricity_total": {
+        "name": "Casa Energia (Totale)"
+      },
+      "backupelectricity_annual": {
+        "name": "Casa Energia (Annuale)"
+      },
+      "backupelectricity_monthly": {
+        "name": "Casa Energia (Mensile)"
+      },
+      "selfhelprate_total": {
+        "name": "Rapporto Contributo EPCUBE (Totale)"
+      },
+      "selfhelprate_annual": {
+        "name": "Rapporto Contributo EPCUBE (Annuale)"
+      },
+      "selfhelprate_monthly": {
+        "name": "Rapporto Contributo EPCUBE (Mensile)"
+      },
+      "isalert_total": {
+        "name": "In Allerta (Totale)"
+      },
+      "isalert_annual": {
+        "name": "In Allerta (Annuale)"
+      },
+      "isalert_monthly": {
+        "name": "In Allerta (Mensile)"
+      },
+      "isfault_total": {
+        "name": "In Rottura (Totale)"
+      },
+      "isfault_annual": {
+        "name": "In Rottura (Annuale)"
+      },
+      "isfault_monthly": {
+        "name": "In Rottura (Mensile)"
       },
       "defcreatetime_total": {
-        "name": "Data Creazione Predefinita (Totale)"
+        "name": "Defcreatetime (Totale)"
       },
       "defcreatetime_annual": {
-        "name": "Data Creazione Predefinita (Annuale)"
+        "name": "Defcreatetime (Annuale)"
       },
       "defcreatetime_monthly": {
-        "name": "Data Creazione Predefinita (Mensile)"
-      },
-      "deftimezone": {
-        "name": "Fuso Orario Predefinito"
+        "name": "Defcreatetime (Mensile)"
       },
       "deftimezone_total": {
-        "name": "Fuso Orario Predefinito (Totale)"
+        "name": "Timezone Coordinate (Totale)"
       },
       "deftimezone_annual": {
-        "name": "Fuso Orario Predefinito (Annuale)"
+        "name": "Timezone Coordinate (Annuale)"
       },
       "deftimezone_monthly": {
-        "name": "Fuso Orario Predefinito (Mensile)"
-      },
-      "fromcreatetime": {
-        "name": "Data Creazione Originale"
+        "name": "Timezone Coordinate (Mensile)"
       },
       "fromcreatetime_total": {
-        "name": "Data Creazione Originale (Totale)"
+        "name": "Fromcreatetime (Totale)"
       },
       "fromcreatetime_annual": {
-        "name": "Data Creazione Originale (Annuale)"
+        "name": "Fromcreatetime (Annuale)"
       },
       "fromcreatetime_monthly": {
-        "name": "Data Creazione Originale (Mensile)"
-      },
-      "fromtimezone": {
-        "name": "Fuso Orario Corrente"
+        "name": "Fromcreatetime (Mensile)"
       },
       "fromtimezone_total": {
-        "name": "Fuso Orario Corrente (Totale)"
+        "name": "Timezone Locale (Totale)"
       },
       "fromtimezone_annual": {
-        "name": "Fuso Orario Corrente (Annuale)"
+        "name": "Timezone Locale (Annuale)"
       },
       "fromtimezone_monthly": {
-        "name": "Fuso Orario Corrente (Mensile)"
-      },
-      "fromtype": {
-        "name": "Tipo Origine"
+        "name": "Timezone Locale (Mensile)"
       },
       "fromtype_total": {
-        "name": "Tipo Origine (Totale)"
+        "name": "Fromtype (Totale)"
       },
       "fromtype_annual": {
-        "name": "Tipo Origine (Annuale)"
+        "name": "Fromtype (Annuale)"
       },
       "fromtype_monthly": {
-        "name": "Tipo Origine (Mensile)"
-      },
-      "systemstatus": {
-        "name": "Stato Sistema"
+        "name": "Fromtype (Mensile)"
       },
       "systemstatus_total": {
-        "name": "Stato Sistema (Totale)"
+        "name": "Stato sistema (Totale)"
       },
       "systemstatus_annual": {
-        "name": "Stato Sistema (Annuale)"
+        "name": "Stato sistema (Annuale)"
       },
       "systemstatus_monthly": {
-        "name": "Stato Sistema (Mensile)"
-      },
-      "backuptype": {
-        "name": "Tipo Backup"
+        "name": "Stato sistema (Mensile)"
       },
       "backuptype_total": {
-        "name": "Tipo Backup (Totale)"
+        "name": "Casa Backup Tipo (Totale)"
       },
       "backuptype_annual": {
-        "name": "Tipo Backup (Annuale)"
+        "name": "Casa Backup Tipo (Annuale)"
       },
       "backuptype_monthly": {
-        "name": "Tipo Backup (Mensile)"
-      },
-      "gridlight": {
-        "name": "Stato Rete"
+        "name": "Casa Backup Tipo (Mensile)"
       },
       "gridlight_total": {
-        "name": "Stato Rete (Totale)"
+        "name": "Rete Luce (Totale)"
       },
       "gridlight_annual": {
-        "name": "Stato Rete (Annuale)"
+        "name": "Rete Luce (Annuale)"
       },
       "gridlight_monthly": {
-        "name": "Stato Rete (Mensile)"
-      },
-      "generatorlight": {
-        "name": "Stato Generatore"
+        "name": "Rete Luce (Mensile)"
       },
       "generatorlight_total": {
-        "name": "Stato Generatore (Totale)"
+        "name": "Generatore Luce (Totale)"
       },
       "generatorlight_annual": {
-        "name": "Stato Generatore (Annuale)"
+        "name": "Generatore Luce (Annuale)"
       },
       "generatorlight_monthly": {
-        "name": "Stato Generatore (Mensile)"
-      },
-      "evlight": {
-        "name": "Stato EV"
+        "name": "Generatore Luce (Mensile)"
       },
       "evlight_total": {
-        "name": "Stato EV (Totale)"
+        "name": "Veicolo Elettrico Luce (Totale)"
       },
       "evlight_annual": {
-        "name": "Stato EV (Annuale)"
+        "name": "Veicolo Elettrico Luce (Annuale)"
       },
       "evlight_monthly": {
-        "name": "Stato EV (Mensile)"
-      },
-      "ressnumber": {
-        "name": "Numero Batterie"
+        "name": "Veicolo Elettrico Luce (Mensile)"
       },
       "ressnumber_total": {
         "name": "Numero Batterie (Totale)"
@@ -433,20 +555,14 @@
       "ressnumber_monthly": {
         "name": "Numero Batterie (Mensile)"
       },
-      "isnewdevice": {
-        "name": "Dispositivo Nuovo"
-      },
       "isnewdevice_total": {
-        "name": "Dispositivo Nuovo (Totale)"
+        "name": "Nuovo Dispositivo (Totale)"
       },
       "isnewdevice_annual": {
-        "name": "Dispositivo Nuovo (Annuale)"
+        "name": "Nuovo Dispositivo (Annuale)"
       },
       "isnewdevice_monthly": {
-        "name": "Dispositivo Nuovo (Mensile)"
-      },
-      "version": {
-        "name": "Versione"
+        "name": "Nuovo Dispositivo (Mensile)"
       },
       "version_total": {
         "name": "Versione (Totale)"
@@ -457,9 +573,6 @@
       "version_monthly": {
         "name": "Versione (Mensile)"
       },
-      "payloadversion": {
-        "name": "Versione Payload"
-      },
       "payloadversion_total": {
         "name": "Versione Payload (Totale)"
       },
@@ -469,284 +582,230 @@
       "payloadversion_monthly": {
         "name": "Versione Payload (Mensile)"
       },
-      "gridtotalpower": {
-        "name": "Potenza Totale Rete"
-      },
       "gridtotalpower_total": {
-        "name": "Potenza Totale Rete (Totale)"
+        "name": "Rete Power Totale (Totale)"
       },
       "gridtotalpower_annual": {
-        "name": "Potenza Totale Rete (Annuale)"
+        "name": "Rete Power Totale (Annuale)"
       },
       "gridtotalpower_monthly": {
-        "name": "Potenza Totale Rete (Mensile)"
-      },
-      "gridhalfpower": {
-        "name": "Potenza Parziale Rete"
+        "name": "Rete Power Totale (Mensile)"
       },
       "gridhalfpower_total": {
-        "name": "Potenza Parziale Rete (Totale)"
+        "name": "Rete Metà Power (Totale)"
       },
       "gridhalfpower_annual": {
-        "name": "Potenza Parziale Rete (Annuale)"
+        "name": "Rete Metà Power (Annuale)"
       },
       "gridhalfpower_monthly": {
-        "name": "Potenza Parziale Rete (Mensile)"
-      },
-      "solarflow": {
-        "name": "Flusso Solare"
+        "name": "Rete Metà Power (Mensile)"
       },
       "solarflow_total": {
-        "name": "Flusso Solare (Totale)"
+        "name": "Solare Flow (Totale)"
       },
       "solarflow_annual": {
-        "name": "Flusso Solare (Annuale)"
+        "name": "Solare Flow (Annuale)"
       },
       "solarflow_monthly": {
-        "name": "Flusso Solare (Mensile)"
+        "name": "Solare Flow (Mensile)"
       },
-      "generatorflowpower": {
-        "name": "Energia Generatore Erogata"
+      "solaracpower_total": {
+        "name": "Solare AC Power (Totale)"
+      },
+      "solaracpower_annual": {
+        "name": "Solare AC Power (Annuale)"
+      },
+      "solaracpower_monthly": {
+        "name": "Solare AC Power (Mensile)"
+      },
+      "solardcpower_total": {
+        "name": "Solare DC Power (Totale)"
+      },
+      "solardcpower_annual": {
+        "name": "Solare DC Power (Annuale)"
+      },
+      "solardcpower_monthly": {
+        "name": "Solare DC Power (Mensile)"
       },
       "generatorflowpower_total": {
-        "name": "Energia Generatore Erogata (Totale)"
+        "name": "Generatore Power Flow (Totale)"
       },
       "generatorflowpower_annual": {
-        "name": "Energia Generatore Erogata (Annuale)"
+        "name": "Generatore Power Flow (Annuale)"
       },
       "generatorflowpower_monthly": {
-        "name": "Energia Generatore Erogata (Mensile)"
-      },
-      "evflowpower": {
-        "name": "Energia EV Erogata"
+        "name": "Generatore Power Flow (Mensile)"
       },
       "evflowpower_total": {
-        "name": "Energia EV Erogata (Totale)"
+        "name": "Veicolo Elettrico Power Flow (Totale)"
       },
       "evflowpower_annual": {
-        "name": "Energia EV Erogata (Annuale)"
+        "name": "Veicolo Elettrico Power Flow (Annuale)"
       },
       "evflowpower_monthly": {
-        "name": "Energia EV Erogata (Mensile)"
-      },
-      "nonbackupflowpower": {
-        "name": "Energia Non Backup Erogata"
+        "name": "Veicolo Elettrico Power Flow (Mensile)"
       },
       "nonbackupflowpower_total": {
-        "name": "Energia Non Backup Erogata (Totale)"
+        "name": "Non Backup Power Flow (Totale)"
       },
       "nonbackupflowpower_annual": {
-        "name": "Energia Non Backup Erogata (Annuale)"
+        "name": "Non Backup Power Flow (Annuale)"
       },
       "nonbackupflowpower_monthly": {
-        "name": "Energia Non Backup Erogata (Mensile)"
-      },
-      "backupflowpower": {
-        "name": "Energia Casa Erogata"
+        "name": "Non Backup Power Flow (Mensile)"
       },
       "backupflowpower_total": {
-        "name": "Energia Casa Erogata (Totale)"
+        "name": "Casa Power Flow (Totale)"
       },
       "backupflowpower_annual": {
-        "name": "Energia Casa Erogata (Annuale)"
+        "name": "Casa Power Flow (Annuale)"
       },
       "backupflowpower_monthly": {
-        "name": "Energia Casa Erogata (Mensile)"
-      },
-      "backuploadsmode": {
-        "name": "Modalità Carico Backup"
+        "name": "Casa Power Flow (Mensile)"
       },
       "backuploadsmode_total": {
-        "name": "Modalità Carico Backup (Totale)"
+        "name": "Casa Modalità Caricamento (Totale)"
       },
       "backuploadsmode_annual": {
-        "name": "Modalità Carico Backup (Annuale)"
+        "name": "Casa Modalità Caricamento (Annuale)"
       },
       "backuploadsmode_monthly": {
-        "name": "Modalità Carico Backup (Mensile)"
-      },
-      "faultwarningtype": {
-        "name": "Tipo Allarme"
+        "name": "Casa Modalità Caricamento (Mensile)"
       },
       "faultwarningtype_total": {
-        "name": "Tipo Allarme (Totale)"
+        "name": "Faultwarningtype (Totale)"
       },
       "faultwarningtype_annual": {
-        "name": "Tipo Allarme (Annuale)"
+        "name": "Faultwarningtype (Annuale)"
       },
       "faultwarningtype_monthly": {
-        "name": "Tipo Allarme (Mensile)"
-      },
-      "off_on_grid_hint": {
-        "name": "Stato Rete ON/OFF"
+        "name": "Faultwarningtype (Mensile)"
       },
       "off_on_grid_hint_total": {
-        "name": "Stato Rete ON/OFF (Totale)"
+        "name": "Off On Grid Hint (Totale)"
       },
       "off_on_grid_hint_annual": {
-        "name": "Stato Rete ON/OFF (Annuale)"
+        "name": "Off On Grid Hint (Annuale)"
       },
       "off_on_grid_hint_monthly": {
-        "name": "Stato Rete ON/OFF (Mensile)"
-      },
-      "weatherwatch": {
-        "name": "Monitoraggio Meteo"
+        "name": "Off On Grid Hint (Mensile)"
       },
       "weatherwatch_total": {
-        "name": "Monitoraggio Meteo (Totale)"
+        "name": "Weatherwatch (Totale)"
       },
       "weatherwatch_annual": {
-        "name": "Monitoraggio Meteo (Annuale)"
+        "name": "Weatherwatch (Annuale)"
       },
       "weatherwatch_monthly": {
-        "name": "Monitoraggio Meteo (Mensile)"
-      },
-      "onlysave": {
-        "name": "Solo Salvataggio"
+        "name": "Weatherwatch (Mensile)"
       },
       "onlysave_total": {
-        "name": "Solo Salvataggio (Totale)"
+        "name": "Onlysave (Totale)"
       },
       "onlysave_annual": {
-        "name": "Solo Salvataggio (Annuale)"
+        "name": "Onlysave (Annuale)"
       },
       "onlysave_monthly": {
-        "name": "Solo Salvataggio (Mensile)"
-      },
-      "backuppowerreservesoc": {
-        "name": "SoC Backup"
+        "name": "Onlysave (Mensile)"
       },
       "backuppowerreservesoc_total": {
-        "name": "SoC Backup (Totale)"
+        "name": "Casa Riserva Power Soc (Totale)"
       },
       "backuppowerreservesoc_annual": {
-        "name": "SoC Backup (Annuale)"
+        "name": "Casa Riserva Power Soc (Annuale)"
       },
       "backuppowerreservesoc_monthly": {
-        "name": "SoC Backup (Mensile)"
-      },
-      "selfconsumptioinreservesoc": {
-        "name": "SoC Autoconsumo"
+        "name": "Casa Riserva Power Soc (Mensile)"
       },
       "selfconsumptioinreservesoc_total": {
-        "name": "SoC Autoconsumo (Totale)"
+        "name": "Autoconsumo Riserva Soc (Totale)"
       },
       "selfconsumptioinreservesoc_annual": {
-        "name": "SoC Autoconsumo (Annuale)"
+        "name": "Autoconsumo Riserva Soc (Annuale)"
       },
       "selfconsumptioinreservesoc_monthly": {
-        "name": "SoC Autoconsumo (Mensile)"
-      },
-      "allowchargingxiagrid": {
-        "name": "Consenti Carica Rete"
+        "name": "Autoconsumo Riserva Soc (Mensile)"
       },
       "allowchargingxiagrid_total": {
-        "name": "Consenti Carica Rete (Totale)"
+        "name": "Consenti la ricarica dalla Rete (Totale)"
       },
       "allowchargingxiagrid_annual": {
-        "name": "Consenti Carica Rete (Annuale)"
+        "name": "Consenti la ricarica dalla Rete (Annuale)"
       },
       "allowchargingxiagrid_monthly": {
-        "name": "Consenti Carica Rete (Mensile)"
-      },
-      "activeweek": {
-        "name": "Settimana Attiva"
+        "name": "Consenti la ricarica dalla Rete (Mensile)"
       },
       "activeweek_total": {
-        "name": "Settimana Attiva (Totale)"
+        "name": "Settimane di attività (Totale)"
       },
       "activeweek_annual": {
-        "name": "Settimana Attiva (Annuale)"
+        "name": "Settimane di attività (Annuale)"
       },
       "activeweek_monthly": {
-        "name": "Settimana Attiva (Mensile)"
-      },
-      "activeweeknonworkday": {
-        "name": "Settimana Attiva Festivi"
+        "name": "Settimane di attività (Mensile)"
       },
       "activeweeknonworkday_total": {
-        "name": "Settimana Attiva Festivi (Totale)"
+        "name": "Settimane di non attività (Totale)"
       },
       "activeweeknonworkday_annual": {
-        "name": "Settimana Attiva Festivi (Annuale)"
+        "name": "Settimane di non attività (Annuale)"
       },
       "activeweeknonworkday_monthly": {
-        "name": "Settimana Attiva Festivi (Mensile)"
-      },
-      "daylightsavingtime": {
-        "name": "Ora Legale"
+        "name": "Settimane di non attività (Mensile)"
       },
       "daylightsavingtime_total": {
-        "name": "Ora Legale (Totale)"
+        "name": "Daylightsavingtime (Totale)"
       },
       "daylightsavingtime_annual": {
-        "name": "Ora Legale (Annuale)"
+        "name": "Daylightsavingtime (Annuale)"
       },
       "daylightsavingtime_monthly": {
-        "name": "Ora Legale (Mensile)"
-      },
-      "daylightactiveweek": {
-        "name": "Settimana Attiva Ora Legale"
+        "name": "Daylightsavingtime (Mensile)"
       },
       "daylightactiveweek_total": {
-        "name": "Settimana Attiva Ora Legale (Totale)"
+        "name": "Daylightactiveweek (Totale)"
       },
       "daylightactiveweek_annual": {
-        "name": "Settimana Attiva Ora Legale (Annuale)"
+        "name": "Daylightactiveweek (Annuale)"
       },
       "daylightactiveweek_monthly": {
-        "name": "Settimana Attiva Ora Legale (Mensile)"
-      },
-      "daylightactiveweeknonworkday": {
-        "name": "Settimana Attiva Festivi Ora Legale"
+        "name": "Daylightactiveweek (Mensile)"
       },
       "daylightactiveweeknonworkday_total": {
-        "name": "Settimana Attiva Festivi Ora Legale (Totale)"
+        "name": "Daylightactiveweeknonworkday (Totale)"
       },
       "daylightactiveweeknonworkday_annual": {
-        "name": "Settimana Attiva Festivi Ora Legale (Annuale)"
+        "name": "Daylightactiveweeknonworkday (Annuale)"
       },
       "daylightactiveweeknonworkday_monthly": {
-        "name": "Settimana Attiva Festivi Ora Legale (Mensile)"
-      },
-      "evchargerreservesoc": {
-        "name": "SoC Riserva EV"
+        "name": "Daylightactiveweeknonworkday (Mensile)"
       },
       "evchargerreservesoc_total": {
-        "name": "SoC Riserva EV (Totale)"
+        "name": "Veicolo Elettrico Batteria di riserva Soc (Totale)"
       },
       "evchargerreservesoc_annual": {
-        "name": "SoC Riserva EV (Annuale)"
+        "name": "Veicolo Elettrico Batteria di riserva Soc (Annuale)"
       },
       "evchargerreservesoc_monthly": {
-        "name": "SoC Riserva EV (Mensile)"
-      },
-      "daytype": {
-        "name": "Tipo Giorno"
+        "name": "Veicolo Elettrico Batteria di riserva Soc (Mensile)"
       },
       "daytype_total": {
-        "name": "Tipo Giorno (Totale)"
+        "name": "Daytype (Totale)"
       },
       "daytype_annual": {
-        "name": "Tipo Giorno (Annuale)"
+        "name": "Daytype (Annuale)"
       },
       "daytype_monthly": {
-        "name": "Tipo Giorno (Mensile)"
-      },
-      "isdaylightsaving": {
-        "name": "È Ora Legale"
+        "name": "Daytype (Mensile)"
       },
       "isdaylightsaving_total": {
-        "name": "È Ora Legale (Totale)"
+        "name": "Isdaylightsaving (Totale)"
       },
       "isdaylightsaving_annual": {
-        "name": "È Ora Legale (Annuale)"
+        "name": "Isdaylightsaving (Annuale)"
       },
       "isdaylightsaving_monthly": {
-        "name": "È Ora Legale (Mensile)"
-      },
-      "activationdata": {
-        "name": "Data Attivazione"
+        "name": "Isdaylightsaving (Mensile)"
       },
       "activationdata_total": {
         "name": "Data Attivazione (Totale)"
@@ -757,9 +816,6 @@
       "activationdata_monthly": {
         "name": "Data Attivazione (Mensile)"
       },
-      "warrantydata": {
-        "name": "Scadenza Garanzia"
-      },
       "warrantydata_total": {
         "name": "Scadenza Garanzia (Totale)"
       },
@@ -769,56 +825,41 @@
       "warrantydata_monthly": {
         "name": "Scadenza Garanzia (Mensile)"
       },
-      "modeltype": {
-        "name": "Modello EP Cube"
-      },
       "modeltype_total": {
-        "name": "Modello EP Cube (Totale)"
+        "name": "Modello EPCUBE (Totale)"
       },
       "modeltype_annual": {
-        "name": "Modello EP Cube (Annuale)"
+        "name": "Modello EPCUBE (Annuale)"
       },
       "modeltype_monthly": {
-        "name": "Modello EP Cube (Mensile)"
-      },
-      "batterycapacity": {
-        "name": "Capacità Batteria"
+        "name": "Modello EPCUBE (Mensile)"
       },
       "batterycapacity_total": {
-        "name": "Capacità Batteria (Totale)"
+        "name": "Batteria Capacità (Totale)"
       },
       "batterycapacity_annual": {
-        "name": "Capacità Batteria (Annuale)"
+        "name": "Batteria Capacità (Annuale)"
       },
       "batterycapacity_monthly": {
-        "name": "Capacità Batteria (Mensile)"
-      },
-      "gridelectricityfrom": {
-        "name": "Energia Da Rete"
+        "name": "Batteria Capacità (Mensile)"
       },
       "gridelectricityfrom_total": {
-        "name": "Energia Da Rete (Totale)"
+        "name": "Rete Electricityfrom (Totale)"
       },
       "gridelectricityfrom_annual": {
-        "name": "Energia Da Rete (Annuale)"
+        "name": "Rete Electricityfrom (Annuale)"
       },
       "gridelectricityfrom_monthly": {
-        "name": "Energia Da Rete (Mensile)"
-      },
-      "gridelectricityto": {
-        "name": "Energia Verso Rete"
+        "name": "Rete Electricityfrom (Mensile)"
       },
       "gridelectricityto_total": {
-        "name": "Energia Verso Rete (Totale)"
+        "name": "Rete Energia Prelevata (Totale)"
       },
       "gridelectricityto_annual": {
-        "name": "Energia Verso Rete (Annuale)"
+        "name": "Rete Energia Prelevata (Annuale)"
       },
       "gridelectricityto_monthly": {
-        "name": "Energia Verso Rete (Mensile)"
-      },
-      "treenum": {
-        "name": "Alberi Salvati"
+        "name": "Rete Energia Prelevata (Mensile)"
       },
       "treenum_total": {
         "name": "Alberi Salvati (Totale)"
@@ -829,9 +870,6 @@
       "treenum_monthly": {
         "name": "Alberi Salvati (Mensile)"
       },
-      "coal": {
-        "name": "Carbone Risparmiato"
-      },
       "coal_total": {
         "name": "Carbone Risparmiato (Totale)"
       },
@@ -840,9 +878,6 @@
       },
       "coal_monthly": {
         "name": "Carbone Risparmiato (Mensile)"
-      },
-      "hasvalue": {
-        "name": "Ha Valore"
       },
       "hasvalue_total": {
         "name": "Ha Valore (Totale)"

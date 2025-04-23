@@ -6,7 +6,7 @@ from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass,
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.util import dt as dt_util
 
-from .const import DOMAIN, DEFAULT_SCAN_INTERVAL, CONF_ENABLE_TOTAL, CONF_ENABLE_ANNUAL, CONF_ENABLE_MONTHLY
+from .const import DOMAIN, DEFAULT_SCAN_INTERVAL, CONF_ENABLE_TOTAL, CONF_ENABLE_ANNUAL, CONF_ENABLE_MONTHLY, CONF_SCALE_POWER
 import aiohttp
 import async_timeout
 from datetime import timedelta, datetime
@@ -286,7 +286,14 @@ async def async_setup_entry(hass, entry, async_add_entities):
     enable_annual = options.get(CONF_ENABLE_ANNUAL, False)
     enable_monthly = options.get(CONF_ENABLE_MONTHLY, False)
 
+    scale_power = options.get("scale_power", False)
+
+    if not coordinator.data or "data" not in coordinator.data:
+        _LOGGER.warning("Nessun dato disponibile dal coordinator, sensori non creati.")
+        return
+
     filtered_data = coordinator.data["data"]
+    
     sensors = generate_sensors(
         filtered_data,
         enable_total=enable_total,
@@ -296,17 +303,19 @@ async def async_setup_entry(hass, entry, async_add_entities):
 
     entities = [EpCubeLastUpdateSensor(coordinator)]
     for sensor in sensors:
-        entities.append(EpCubeSensor(coordinator, sensor))
+        entities.append(EpCubeSensor(coordinator, sensor, scale_power=scale_power))
+    
 
     async_add_entities(entities, True)
     return True
 
 
 class EpCubeSensor(CoordinatorEntity, SensorEntity):
-    def __init__(self, coordinator, description):
+    def __init__(self, coordinator, description, scale_power=False):
         super().__init__(coordinator)
         self.coordinator = coordinator
         self.entity_description = description
+        self.scale_power = scale_power
         self._attr_unique_id = f"epcube_{description.key}"
         self._attr_has_entity_name = True
         #self._attr_name = f"EP CUBE {description.name}"
@@ -327,9 +336,19 @@ class EpCubeSensor(CoordinatorEntity, SensorEntity):
     @property
     def native_value(self):
         value = self.coordinator.data["data"].get(self.entity_description.key)
-        #_LOGGER.debug("Valore aggiornato per %s: %s", self.entity_description.key, value)
+    
+        if value is not None and self.scale_power:
+            if isinstance(value, (int, float)):
+                if self.entity_description.native_unit_of_measurement in [
+                    UnitOfPower.WATT,
+                    UnitOfPower.KILO_WATT,
+                    UnitOfEnergy.KILO_WATT_HOUR,
+                ]:
+                    return round(value * 1000, 3)
         return value
-
+    
+    
+    
 
 class EpCubeLastUpdateSensor(CoordinatorEntity, SensorEntity):
     def __init__(self, coordinator):

@@ -45,7 +45,11 @@ class EpCubeDynamicSocNumber(CoordinatorEntity, NumberEntity):
             "configuration_url": "https://monitoring-eu.epcube.com/"
         }
 
-        mode = str(self.coordinator.data["data"].get("workstatus"))
+        if coordinator.data and coordinator.data.get("data"):
+            mode = str(coordinator.data["data"].get("workstatus", ""))
+        else:
+            mode = ""
+
         if mode == "1":
             self._attr_min_value = 0
         else:
@@ -54,7 +58,7 @@ class EpCubeDynamicSocNumber(CoordinatorEntity, NumberEntity):
 
     @property
     def _mode(self):
-        return str(self.coordinator.data["data"].get("workstatus"))
+        return str(self.coordinator.data.get("data", {}).get("workstatus", ""))
 
     @property
     def _soc_key(self):
@@ -65,14 +69,15 @@ class EpCubeDynamicSocNumber(CoordinatorEntity, NumberEntity):
 
     @property
     def native_value(self):
-        value = self.coordinator.data["data"].get(self._soc_key.lower())
+        value = self.coordinator.data.get("data", {}).get(self._soc_key.lower())
         _LOGGER.debug("SOC attuale (%s): %s", self._soc_key.lower(), value)
         return int(value) if value is not None else None
     
     
+    
 
     async def async_set_native_value(self, value: float):
-        dev_id = self.coordinator.data["data"].get("devid")
+        dev_id = self.coordinator.data.get("data", {}).get("devid")
         work_status = self._mode
 
         key_original = self._soc_key
@@ -136,14 +141,15 @@ class EpCubeStaticSocNumber(CoordinatorEntity, NumberEntity):
 
     @property
     def native_value(self):
-        value = self.coordinator.data["data"].get(self.original_key.lower())
+        value = self.coordinator.data.get("data", {}).get(self.original_key.lower())
         _LOGGER.debug("SOC statico attuale (%s): %s", self.original_key.lower(), value)
         return int(value) if value is not None else None
     
 
     async def async_set_native_value(self, value: float):
-        dev_id = self.coordinator.data["data"].get("devid")
-        work_status = self.coordinator.data["data"].get("workstatus")
+        dev_id = self.coordinator.data.get("data", {}).get("devid")
+        work_status = self.coordinator.data.get("data", {}).get("workstatus")
+        
 
         payload = {
             "devId": dev_id,

@@ -3,13 +3,9 @@ from homeassistant import config_entries
 from homeassistant.core import callback
 import aiohttp
 import logging
-from .const import DOMAIN, DEFAULT_SCAN_INTERVAL
+from .const import DOMAIN, DEFAULT_SCAN_INTERVAL, CONF_SCALE_POWER, CONF_ENABLE_TOTAL, CONF_ENABLE_ANNUAL, CONF_ENABLE_MONTHLY
 
 _LOGGER = logging.getLogger(__name__)
-
-CONF_ENABLE_TOTAL = "enable_total"
-CONF_ENABLE_ANNUAL = "enable_annual"
-CONF_ENABLE_MONTHLY = "enable_monthly"
 
 class EpCubeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
@@ -86,6 +82,7 @@ class EpCubeOptionsFlow(config_entries.OptionsFlow):
             return self.async_create_entry(title="", data={
                 "token": token,
                 "scan_interval": user_input.get("scan_interval", DEFAULT_SCAN_INTERVAL),
+                CONF_SCALE_POWER: user_input.get(CONF_SCALE_POWER, False),
                 CONF_ENABLE_TOTAL: user_input.get(CONF_ENABLE_TOTAL, False),
                 CONF_ENABLE_ANNUAL: user_input.get(CONF_ENABLE_ANNUAL, False),
                 CONF_ENABLE_MONTHLY: user_input.get(CONF_ENABLE_MONTHLY, False),
@@ -96,6 +93,7 @@ class EpCubeOptionsFlow(config_entries.OptionsFlow):
             data_schema=vol.Schema({
                 vol.Optional("token", default=self._config_entry.data.get("token")): str,
                 vol.Optional("scan_interval", default=self._config_entry.options.get("scan_interval", DEFAULT_SCAN_INTERVAL)): int,
+                vol.Optional(CONF_SCALE_POWER, default=self._config_entry.options.get(CONF_SCALE_POWER, False)): bool,
                 vol.Optional(CONF_ENABLE_TOTAL, default=self._config_entry.options.get(CONF_ENABLE_TOTAL, False)): bool,
                 vol.Optional(CONF_ENABLE_ANNUAL, default=self._config_entry.options.get(CONF_ENABLE_ANNUAL, False)): bool,
                 vol.Optional(CONF_ENABLE_MONTHLY, default=self._config_entry.options.get(CONF_ENABLE_MONTHLY, False)): bool,
