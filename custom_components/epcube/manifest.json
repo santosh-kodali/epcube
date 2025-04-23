@@ -3,6 +3,7 @@
   "name": "EP CUBE Energy Monitor",
   "version": "1.0.2",
   "documentation": "https://github.com/Bobsilvio/epcube-homeassistant/",
+  "issue_tracker": "https://github.com/Bobsilvio/epcube-homeassistant/issues",
   "dependencies": [],
   "codeowners": ["@Bobsilvio"],
   "requirements": [],
