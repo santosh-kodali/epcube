@@ -1,14 +1,13 @@
 {
   "domain": "epcube",
   "name": "EP CUBE Energy Monitor",
-  "version": "1.0.2",
-  "documentation": "https://github.com/Bobsilvio/epcube-homeassistant/",
-  "issue_tracker": "https://github.com/Bobsilvio/epcube-homeassistant/issues",
-  "dependencies": [],
   "codeowners": ["@Bobsilvio"],
-  "requirements": [],
-  "iot_class": "cloud_polling",
   "config_flow": true,
-  "zeroconf": [],
-  "loggers": ["epcube"]
+  "dependencies": [],
+  "documentation": "https://github.com/Bobsilvio/epcube-homeassistant/",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/Bobsilvio/epcube-homeassistant/issues",
+  "loggers": ["epcube"],
+  "requirements": [],
+  "version": "1.0.2"
 }
