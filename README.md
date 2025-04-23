@@ -26,7 +26,7 @@ Custom Home Assistant integration for monitoring the EP Cube energy storage syst
 6. Go to **Settings > Devices & Services** and add the integration
 
 ## 📦 Installation simple
-[![Open in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=bobsilvio&repository=epcube-homeassistant&category=integration)
+[![Open in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=bobsilvio&repository=epcube&category=integration)
 
 ---
 
