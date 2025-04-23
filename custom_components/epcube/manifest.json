@@ -12,5 +12,4 @@
   "zeroconf": [],
   "devices": [],
   "loggers": ["epcube"],
-  "homeassistant": "2023.4.0"
 }
