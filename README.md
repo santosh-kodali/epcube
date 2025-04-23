@@ -12,7 +12,7 @@ Custom Home Assistant integration for monitoring the EP Cube energy storage syst
   - Can be enabled individually or all at once via configuration  
 - ⚙️ Built-in **configuration and diagnostic entities**  
 - 🧩 Fully integrated with Home Assistant UI (config flow, device info, icons)
-- 🔐 Requires a **valid Bearer token** (token generation via reverse engineering is planned)
+- 🔐 Requires a **valid Bearer token** (token generation via reverse engineering, [HERE](https://epcube-token.streamlit.app/))
 
 ---
 
@@ -20,20 +20,20 @@ Custom Home Assistant integration for monitoring the EP Cube energy storage syst
 
 1. Open Home Assistant  
 2. Go to **HACS > Integrations > Custom repositories**  
-3. Add: `https://github.com/Bobsilvio/epcube-homeassistant` with type `Integration`  
+3. Add: `https://github.com/Bobsilvio/epcube` with type `Integration`  
 4. Search for `EPCube` and install it  
 5. Restart Home Assistant  
 6. Go to **Settings > Devices & Services** and add the integration
 
 ## 📦 Installation simple
-[![Open in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=bobsilvio&repository=epcube-homeassistant&category=integration)
+[![Open in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=bobsilvio&repository=epcube&category=integration)
 
 ---
 
 ## ⚠️ Requirements
 
 - EP Cube account  
-- Bearer token (must be generated manually for now)
+- Bearer token ([HERE](https://github.com/Bobsilvio/epcube-token))
 
 ---
 
