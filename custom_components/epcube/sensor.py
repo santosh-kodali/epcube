@@ -146,11 +146,12 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
             unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
             state_class = SensorStateClass.TOTAL_INCREASING
         elif "soc" in base_key:
-            device_class = SensorDeviceClass.BATTERY
+            #device_class = SensorDeviceClass.BATTERY
             unit_of_measurement = PERCENTAGE
             state_class = SensorStateClass.MEASUREMENT
-
+            
             if base_key == "batterysoc":
+                device_class = SensorDeviceClass.BATTERY
                 entity_category = None
             else:
                 entity_category = EntityCategory.DIAGNOSTIC
