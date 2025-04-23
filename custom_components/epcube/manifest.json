@@ -1,7 +1,7 @@
 {
   "domain": "epcube",
   "name": "EP CUBE Energy Monitor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "documentation": "https://github.com/Bobsilvio/epcube-homeassistant/",
   "dependencies": [],
   "codeowners": ["@Bobsilvio"],

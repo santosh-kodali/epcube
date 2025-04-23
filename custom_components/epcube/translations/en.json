@@ -1,14 +1,869 @@
-
 {
-  "config": {
-    "step": {
-      "user": {
-        "title": "Configure EpCube",
-        "data": {
-          "token": "Bearer Token",
-          "sn": "Serial Number",
-          "scan_interval": "Polling interval (seconds)"
-        }
+  "entity": {
+    "sensor": {
+      "devid": {
+        "name": "Devid"
+      },
+      "devid_total": {
+        "name": "Devid Total"
+      },
+      "devid_annual": {
+        "name": "Devid Annual"
+      },
+      "devid_monthly": {
+        "name": "Devid Monthly"
+      },
+      "status": {
+        "name": "Status"
+      },
+      "status_total": {
+        "name": "Status Total"
+      },
+      "status_annual": {
+        "name": "Status Annual"
+      },
+      "status_monthly": {
+        "name": "Status Monthly"
+      },
+      "workstatus": {
+        "name": "Workstatus"
+      },
+      "workstatus_total": {
+        "name": "Workstatus Total"
+      },
+      "workstatus_annual": {
+        "name": "Workstatus Annual"
+      },
+      "workstatus_monthly": {
+        "name": "Workstatus Monthly"
+      },
+      "batterysoc": {
+        "name": "Batterysoc"
+      },
+      "batterysoc_total": {
+        "name": "Batterysoc Total"
+      },
+      "batterysoc_annual": {
+        "name": "Batterysoc Annual"
+      },
+      "batterysoc_monthly": {
+        "name": "Batterysoc Monthly"
+      },
+      "batterycurrentelectricity": {
+        "name": "Batterycurrentelectricity"
+      },
+      "batterycurrentelectricity_total": {
+        "name": "Batterycurrentelectricity Total"
+      },
+      "batterycurrentelectricity_annual": {
+        "name": "Batterycurrentelectricity Annual"
+      },
+      "batterycurrentelectricity_monthly": {
+        "name": "Batterycurrentelectricity Monthly"
+      },
+      "gridpowerfailurenum": {
+        "name": "Gridpowerfailurenum"
+      },
+      "gridpowerfailurenum_total": {
+        "name": "Gridpowerfailurenum Total"
+      },
+      "gridpowerfailurenum_annual": {
+        "name": "Gridpowerfailurenum Annual"
+      },
+      "gridpowerfailurenum_monthly": {
+        "name": "Gridpowerfailurenum Monthly"
+      },
+      "offgridpowersupplytime": {
+        "name": "Offgridpowersupplytime"
+      },
+      "offgridpowersupplytime_total": {
+        "name": "Offgridpowersupplytime Total"
+      },
+      "offgridpowersupplytime_annual": {
+        "name": "Offgridpowersupplytime Annual"
+      },
+      "offgridpowersupplytime_monthly": {
+        "name": "Offgridpowersupplytime Monthly"
+      },
+      "gridpower": {
+        "name": "Gridpower"
+      },
+      "gridpower_total": {
+        "name": "Gridpower Total"
+      },
+      "gridpower_annual": {
+        "name": "Gridpower Annual"
+      },
+      "gridpower_monthly": {
+        "name": "Gridpower Monthly"
+      },
+      "gridelectricity": {
+        "name": "Gridelectricity"
+      },
+      "gridelectricity_total": {
+        "name": "Gridelectricity Total"
+      },
+      "gridelectricity_annual": {
+        "name": "Gridelectricity Annual"
+      },
+      "gridelectricity_monthly": {
+        "name": "Gridelectricity Monthly"
+      },
+      "solarpower": {
+        "name": "Solarpower"
+      },
+      "solarpower_total": {
+        "name": "Solarpower Total"
+      },
+      "solarpower_annual": {
+        "name": "Solarpower Annual"
+      },
+      "solarpower_monthly": {
+        "name": "Solarpower Monthly"
+      },
+      "solarelectricity": {
+        "name": "Solarelectricity"
+      },
+      "solarelectricity_total": {
+        "name": "Solarelectricity Total"
+      },
+      "solarelectricity_annual": {
+        "name": "Solarelectricity Annual"
+      },
+      "solarelectricity_monthly": {
+        "name": "Solarelectricity Monthly"
+      },
+      "solardcelectricity": {
+        "name": "Solardcelectricity"
+      },
+      "solardcelectricity_total": {
+        "name": "Solardcelectricity Total"
+      },
+      "solardcelectricity_annual": {
+        "name": "Solardcelectricity Annual"
+      },
+      "solardcelectricity_monthly": {
+        "name": "Solardcelectricity Monthly"
+      },
+      "solaracelectricity": {
+        "name": "Solaracelectricity"
+      },
+      "solaracelectricity_total": {
+        "name": "Solaracelectricity Total"
+      },
+      "solaracelectricity_annual": {
+        "name": "Solaracelectricity Annual"
+      },
+      "solaracelectricity_monthly": {
+        "name": "Solaracelectricity Monthly"
+      },
+      "generatorpower": {
+        "name": "Generatorpower"
+      },
+      "generatorpower_total": {
+        "name": "Generatorpower Total"
+      },
+      "generatorpower_annual": {
+        "name": "Generatorpower Annual"
+      },
+      "generatorpower_monthly": {
+        "name": "Generatorpower Monthly"
+      },
+      "generatorelectricity": {
+        "name": "Generatorelectricity"
+      },
+      "generatorelectricity_total": {
+        "name": "Generatorelectricity Total"
+      },
+      "generatorelectricity_annual": {
+        "name": "Generatorelectricity Annual"
+      },
+      "generatorelectricity_monthly": {
+        "name": "Generatorelectricity Monthly"
+      },
+      "evpower": {
+        "name": "Evpower"
+      },
+      "evpower_total": {
+        "name": "Evpower Total"
+      },
+      "evpower_annual": {
+        "name": "Evpower Annual"
+      },
+      "evpower_monthly": {
+        "name": "Evpower Monthly"
+      },
+      "evelectricity": {
+        "name": "Evelectricity"
+      },
+      "evelectricity_total": {
+        "name": "Evelectricity Total"
+      },
+      "evelectricity_annual": {
+        "name": "Evelectricity Annual"
+      },
+      "evelectricity_monthly": {
+        "name": "Evelectricity Monthly"
+      },
+      "nonbackuppower": {
+        "name": "Nonbackuppower"
+      },
+      "nonbackuppower_total": {
+        "name": "Nonbackuppower Total"
+      },
+      "nonbackuppower_annual": {
+        "name": "Nonbackuppower Annual"
+      },
+      "nonbackuppower_monthly": {
+        "name": "Nonbackuppower Monthly"
+      },
+      "nonbackupelectricity": {
+        "name": "Nonbackupelectricity"
+      },
+      "nonbackupelectricity_total": {
+        "name": "Nonbackupelectricity Total"
+      },
+      "nonbackupelectricity_annual": {
+        "name": "Nonbackupelectricity Annual"
+      },
+      "nonbackupelectricity_monthly": {
+        "name": "Nonbackupelectricity Monthly"
+      },
+      "backuppower": {
+        "name": "Backuppower"
+      },
+      "backuppower_total": {
+        "name": "Backuppower Total"
+      },
+      "backuppower_annual": {
+        "name": "Backuppower Annual"
+      },
+      "backuppower_monthly": {
+        "name": "Backuppower Monthly"
+      },
+      "backupelectricity": {
+        "name": "Backupelectricity"
+      },
+      "backupelectricity_total": {
+        "name": "Backupelectricity Total"
+      },
+      "backupelectricity_annual": {
+        "name": "Backupelectricity Annual"
+      },
+      "backupelectricity_monthly": {
+        "name": "Backupelectricity Monthly"
+      },
+      "selfhelprate": {
+        "name": "Selfhelprate"
+      },
+      "selfhelprate_total": {
+        "name": "Selfhelprate Total"
+      },
+      "selfhelprate_annual": {
+        "name": "Selfhelprate Annual"
+      },
+      "selfhelprate_monthly": {
+        "name": "Selfhelprate Monthly"
+      },
+      "isalert": {
+        "name": "Isalert"
+      },
+      "isalert_total": {
+        "name": "Isalert Total"
+      },
+      "isalert_annual": {
+        "name": "Isalert Annual"
+      },
+      "isalert_monthly": {
+        "name": "Isalert Monthly"
+      },
+      "isfault": {
+        "name": "Isfault"
+      },
+      "isfault_total": {
+        "name": "Isfault Total"
+      },
+      "isfault_annual": {
+        "name": "Isfault Annual"
+      },
+      "isfault_monthly": {
+        "name": "Isfault Monthly"
+      },
+      "defcreatetime": {
+        "name": "Defcreatetime"
+      },
+      "defcreatetime_total": {
+        "name": "Defcreatetime Total"
+      },
+      "defcreatetime_annual": {
+        "name": "Defcreatetime Annual"
+      },
+      "defcreatetime_monthly": {
+        "name": "Defcreatetime Monthly"
+      },
+      "deftimezone": {
+        "name": "Deftimezone"
+      },
+      "deftimezone_total": {
+        "name": "Deftimezone Total"
+      },
+      "deftimezone_annual": {
+        "name": "Deftimezone Annual"
+      },
+      "deftimezone_monthly": {
+        "name": "Deftimezone Monthly"
+      },
+      "fromcreatetime": {
+        "name": "Fromcreatetime"
+      },
+      "fromcreatetime_total": {
+        "name": "Fromcreatetime Total"
+      },
+      "fromcreatetime_annual": {
+        "name": "Fromcreatetime Annual"
+      },
+      "fromcreatetime_monthly": {
+        "name": "Fromcreatetime Monthly"
+      },
+      "fromtimezone": {
+        "name": "Fromtimezone"
+      },
+      "fromtimezone_total": {
+        "name": "Fromtimezone Total"
+      },
+      "fromtimezone_annual": {
+        "name": "Fromtimezone Annual"
+      },
+      "fromtimezone_monthly": {
+        "name": "Fromtimezone Monthly"
+      },
+      "fromtype": {
+        "name": "Fromtype"
+      },
+      "fromtype_total": {
+        "name": "Fromtype Total"
+      },
+      "fromtype_annual": {
+        "name": "Fromtype Annual"
+      },
+      "fromtype_monthly": {
+        "name": "Fromtype Monthly"
+      },
+      "systemstatus": {
+        "name": "Systemstatus"
+      },
+      "systemstatus_total": {
+        "name": "Systemstatus Total"
+      },
+      "systemstatus_annual": {
+        "name": "Systemstatus Annual"
+      },
+      "systemstatus_monthly": {
+        "name": "Systemstatus Monthly"
+      },
+      "backuptype": {
+        "name": "Backuptype"
+      },
+      "backuptype_total": {
+        "name": "Backuptype Total"
+      },
+      "backuptype_annual": {
+        "name": "Backuptype Annual"
+      },
+      "backuptype_monthly": {
+        "name": "Backuptype Monthly"
+      },
+      "gridlight": {
+        "name": "Gridlight"
+      },
+      "gridlight_total": {
+        "name": "Gridlight Total"
+      },
+      "gridlight_annual": {
+        "name": "Gridlight Annual"
+      },
+      "gridlight_monthly": {
+        "name": "Gridlight Monthly"
+      },
+      "generatorlight": {
+        "name": "Generatorlight"
+      },
+      "generatorlight_total": {
+        "name": "Generatorlight Total"
+      },
+      "generatorlight_annual": {
+        "name": "Generatorlight Annual"
+      },
+      "generatorlight_monthly": {
+        "name": "Generatorlight Monthly"
+      },
+      "evlight": {
+        "name": "Evlight"
+      },
+      "evlight_total": {
+        "name": "Evlight Total"
+      },
+      "evlight_annual": {
+        "name": "Evlight Annual"
+      },
+      "evlight_monthly": {
+        "name": "Evlight Monthly"
+      },
+      "ressnumber": {
+        "name": "Ressnumber"
+      },
+      "ressnumber_total": {
+        "name": "Ressnumber Total"
+      },
+      "ressnumber_annual": {
+        "name": "Ressnumber Annual"
+      },
+      "ressnumber_monthly": {
+        "name": "Ressnumber Monthly"
+      },
+      "isnewdevice": {
+        "name": "Isnewdevice"
+      },
+      "isnewdevice_total": {
+        "name": "Isnewdevice Total"
+      },
+      "isnewdevice_annual": {
+        "name": "Isnewdevice Annual"
+      },
+      "isnewdevice_monthly": {
+        "name": "Isnewdevice Monthly"
+      },
+      "version": {
+        "name": "Version"
+      },
+      "version_total": {
+        "name": "Version Total"
+      },
+      "version_annual": {
+        "name": "Version Annual"
+      },
+      "version_monthly": {
+        "name": "Version Monthly"
+      },
+      "payloadversion": {
+        "name": "Payloadversion"
+      },
+      "payloadversion_total": {
+        "name": "Payloadversion Total"
+      },
+      "payloadversion_annual": {
+        "name": "Payloadversion Annual"
+      },
+      "payloadversion_monthly": {
+        "name": "Payloadversion Monthly"
+      },
+      "gridtotalpower": {
+        "name": "Gridtotalpower"
+      },
+      "gridtotalpower_total": {
+        "name": "Gridtotalpower Total"
+      },
+      "gridtotalpower_annual": {
+        "name": "Gridtotalpower Annual"
+      },
+      "gridtotalpower_monthly": {
+        "name": "Gridtotalpower Monthly"
+      },
+      "gridhalfpower": {
+        "name": "Gridhalfpower"
+      },
+      "gridhalfpower_total": {
+        "name": "Gridhalfpower Total"
+      },
+      "gridhalfpower_annual": {
+        "name": "Gridhalfpower Annual"
+      },
+      "gridhalfpower_monthly": {
+        "name": "Gridhalfpower Monthly"
+      },
+      "solarflow": {
+        "name": "Solarflow"
+      },
+      "solarflow_total": {
+        "name": "Solarflow Total"
+      },
+      "solarflow_annual": {
+        "name": "Solarflow Annual"
+      },
+      "solarflow_monthly": {
+        "name": "Solarflow Monthly"
+      },
+      "solaracpower": {
+        "name": "Solaracpower"
+      },
+      "solaracpower_total": {
+        "name": "Solaracpower Total"
+      },
+      "solaracpower_annual": {
+        "name": "Solaracpower Annual"
+      },
+      "solaracpower_monthly": {
+        "name": "Solaracpower Monthly"
+      },
+      "solardcpower": {
+        "name": "Solardcpower"
+      },
+      "solardcpower_total": {
+        "name": "Solardcpower Total"
+      },
+      "solardcpower_annual": {
+        "name": "Solardcpower Annual"
+      },
+      "solardcpower_monthly": {
+        "name": "Solardcpower Monthly"
+      },
+      "generatorflowpower": {
+        "name": "Generatorflowpower"
+      },
+      "generatorflowpower_total": {
+        "name": "Generatorflowpower Total"
+      },
+      "generatorflowpower_annual": {
+        "name": "Generatorflowpower Annual"
+      },
+      "generatorflowpower_monthly": {
+        "name": "Generatorflowpower Monthly"
+      },
+      "evflowpower": {
+        "name": "Evflowpower"
+      },
+      "evflowpower_total": {
+        "name": "Evflowpower Total"
+      },
+      "evflowpower_annual": {
+        "name": "Evflowpower Annual"
+      },
+      "evflowpower_monthly": {
+        "name": "Evflowpower Monthly"
+      },
+      "nonbackupflowpower": {
+        "name": "Nonbackupflowpower"
+      },
+      "nonbackupflowpower_total": {
+        "name": "Nonbackupflowpower Total"
+      },
+      "nonbackupflowpower_annual": {
+        "name": "Nonbackupflowpower Annual"
+      },
+      "nonbackupflowpower_monthly": {
+        "name": "Nonbackupflowpower Monthly"
+      },
+      "backupflowpower": {
+        "name": "Backupflowpower"
+      },
+      "backupflowpower_total": {
+        "name": "Backupflowpower Total"
+      },
+      "backupflowpower_annual": {
+        "name": "Backupflowpower Annual"
+      },
+      "backupflowpower_monthly": {
+        "name": "Backupflowpower Monthly"
+      },
+      "backuploadsmode": {
+        "name": "Backuploadsmode"
+      },
+      "backuploadsmode_total": {
+        "name": "Backuploadsmode Total"
+      },
+      "backuploadsmode_annual": {
+        "name": "Backuploadsmode Annual"
+      },
+      "backuploadsmode_monthly": {
+        "name": "Backuploadsmode Monthly"
+      },
+      "faultwarningtype": {
+        "name": "Faultwarningtype"
+      },
+      "faultwarningtype_total": {
+        "name": "Faultwarningtype Total"
+      },
+      "faultwarningtype_annual": {
+        "name": "Faultwarningtype Annual"
+      },
+      "faultwarningtype_monthly": {
+        "name": "Faultwarningtype Monthly"
+      },
+      "off_on_grid_hint": {
+        "name": "Off On Grid Hint"
+      },
+      "off_on_grid_hint_total": {
+        "name": "Off On Grid Hint Total"
+      },
+      "off_on_grid_hint_annual": {
+        "name": "Off On Grid Hint Annual"
+      },
+      "off_on_grid_hint_monthly": {
+        "name": "Off On Grid Hint Monthly"
+      },
+      "weatherwatch": {
+        "name": "Weatherwatch"
+      },
+      "weatherwatch_total": {
+        "name": "Weatherwatch Total"
+      },
+      "weatherwatch_annual": {
+        "name": "Weatherwatch Annual"
+      },
+      "weatherwatch_monthly": {
+        "name": "Weatherwatch Monthly"
+      },
+      "onlysave": {
+        "name": "Onlysave"
+      },
+      "onlysave_total": {
+        "name": "Onlysave Total"
+      },
+      "onlysave_annual": {
+        "name": "Onlysave Annual"
+      },
+      "onlysave_monthly": {
+        "name": "Onlysave Monthly"
+      },
+      "backuppowerreservesoc": {
+        "name": "Backuppowerreservesoc"
+      },
+      "backuppowerreservesoc_total": {
+        "name": "Backuppowerreservesoc Total"
+      },
+      "backuppowerreservesoc_annual": {
+        "name": "Backuppowerreservesoc Annual"
+      },
+      "backuppowerreservesoc_monthly": {
+        "name": "Backuppowerreservesoc Monthly"
+      },
+      "selfconsumptioinreservesoc": {
+        "name": "Selfconsumptioinreservesoc"
+      },
+      "selfconsumptioinreservesoc_total": {
+        "name": "Selfconsumptioinreservesoc Total"
+      },
+      "selfconsumptioinreservesoc_annual": {
+        "name": "Selfconsumptioinreservesoc Annual"
+      },
+      "selfconsumptioinreservesoc_monthly": {
+        "name": "Selfconsumptioinreservesoc Monthly"
+      },
+      "allowchargingxiagrid": {
+        "name": "Allowchargingxiagrid"
+      },
+      "allowchargingxiagrid_total": {
+        "name": "Allowchargingxiagrid Total"
+      },
+      "allowchargingxiagrid_annual": {
+        "name": "Allowchargingxiagrid Annual"
+      },
+      "allowchargingxiagrid_monthly": {
+        "name": "Allowchargingxiagrid Monthly"
+      },
+      "activeweek": {
+        "name": "Activeweek"
+      },
+      "activeweek_total": {
+        "name": "Activeweek Total"
+      },
+      "activeweek_annual": {
+        "name": "Activeweek Annual"
+      },
+      "activeweek_monthly": {
+        "name": "Activeweek Monthly"
+      },
+      "activeweeknonworkday": {
+        "name": "Activeweeknonworkday"
+      },
+      "activeweeknonworkday_total": {
+        "name": "Activeweeknonworkday Total"
+      },
+      "activeweeknonworkday_annual": {
+        "name": "Activeweeknonworkday Annual"
+      },
+      "activeweeknonworkday_monthly": {
+        "name": "Activeweeknonworkday Monthly"
+      },
+      "daylightsavingtime": {
+        "name": "Daylightsavingtime"
+      },
+      "daylightsavingtime_total": {
+        "name": "Daylightsavingtime Total"
+      },
+      "daylightsavingtime_annual": {
+        "name": "Daylightsavingtime Annual"
+      },
+      "daylightsavingtime_monthly": {
+        "name": "Daylightsavingtime Monthly"
+      },
+      "daylightactiveweek": {
+        "name": "Daylightactiveweek"
+      },
+      "daylightactiveweek_total": {
+        "name": "Daylightactiveweek Total"
+      },
+      "daylightactiveweek_annual": {
+        "name": "Daylightactiveweek Annual"
+      },
+      "daylightactiveweek_monthly": {
+        "name": "Daylightactiveweek Monthly"
+      },
+      "daylightactiveweeknonworkday": {
+        "name": "Daylightactiveweeknonworkday"
+      },
+      "daylightactiveweeknonworkday_total": {
+        "name": "Daylightactiveweeknonworkday Total"
+      },
+      "daylightactiveweeknonworkday_annual": {
+        "name": "Daylightactiveweeknonworkday Annual"
+      },
+      "daylightactiveweeknonworkday_monthly": {
+        "name": "Daylightactiveweeknonworkday Monthly"
+      },
+      "evchargerreservesoc": {
+        "name": "Evchargerreservesoc"
+      },
+      "evchargerreservesoc_total": {
+        "name": "Evchargerreservesoc Total"
+      },
+      "evchargerreservesoc_annual": {
+        "name": "Evchargerreservesoc Annual"
+      },
+      "evchargerreservesoc_monthly": {
+        "name": "Evchargerreservesoc Monthly"
+      },
+      "daytype": {
+        "name": "Daytype"
+      },
+      "daytype_total": {
+        "name": "Daytype Total"
+      },
+      "daytype_annual": {
+        "name": "Daytype Annual"
+      },
+      "daytype_monthly": {
+        "name": "Daytype Monthly"
+      },
+      "isdaylightsaving": {
+        "name": "Isdaylightsaving"
+      },
+      "isdaylightsaving_total": {
+        "name": "Isdaylightsaving Total"
+      },
+      "isdaylightsaving_annual": {
+        "name": "Isdaylightsaving Annual"
+      },
+      "isdaylightsaving_monthly": {
+        "name": "Isdaylightsaving Monthly"
+      },
+      "activationdata": {
+        "name": "Activationdata"
+      },
+      "activationdata_total": {
+        "name": "Activationdata Total"
+      },
+      "activationdata_annual": {
+        "name": "Activationdata Annual"
+      },
+      "activationdata_monthly": {
+        "name": "Activationdata Monthly"
+      },
+      "warrantydata": {
+        "name": "Warrantydata"
+      },
+      "warrantydata_total": {
+        "name": "Warrantydata Total"
+      },
+      "warrantydata_annual": {
+        "name": "Warrantydata Annual"
+      },
+      "warrantydata_monthly": {
+        "name": "Warrantydata Monthly"
+      },
+      "modeltype": {
+        "name": "Modeltype"
+      },
+      "modeltype_total": {
+        "name": "Modeltype Total"
+      },
+      "modeltype_annual": {
+        "name": "Modeltype Annual"
+      },
+      "modeltype_monthly": {
+        "name": "Modeltype Monthly"
+      },
+      "batterycapacity": {
+        "name": "Batterycapacity"
+      },
+      "batterycapacity_total": {
+        "name": "Batterycapacity Total"
+      },
+      "batterycapacity_annual": {
+        "name": "Batterycapacity Annual"
+      },
+      "batterycapacity_monthly": {
+        "name": "Batterycapacity Monthly"
+      },
+      "gridelectricityfrom": {
+        "name": "Gridelectricityfrom"
+      },
+      "gridelectricityfrom_total": {
+        "name": "Gridelectricityfrom Total"
+      },
+      "gridelectricityfrom_annual": {
+        "name": "Gridelectricityfrom Annual"
+      },
+      "gridelectricityfrom_monthly": {
+        "name": "Gridelectricityfrom Monthly"
+      },
+      "gridelectricityto": {
+        "name": "Gridelectricityto"
+      },
+      "gridelectricityto_total": {
+        "name": "Gridelectricityto Total"
+      },
+      "gridelectricityto_annual": {
+        "name": "Gridelectricityto Annual"
+      },
+      "gridelectricityto_monthly": {
+        "name": "Gridelectricityto Monthly"
+      },
+      "treenum": {
+        "name": "Treenum"
+      },
+      "treenum_total": {
+        "name": "Treenum Total"
+      },
+      "treenum_annual": {
+        "name": "Treenum Annual"
+      },
+      "treenum_monthly": {
+        "name": "Treenum Monthly"
+      },
+      "coal": {
+        "name": "Coal"
+      },
+      "coal_total": {
+        "name": "Coal Total"
+      },
+      "coal_annual": {
+        "name": "Coal Annual"
+      },
+      "coal_monthly": {
+        "name": "Coal Monthly"
+      },
+      "hasvalue": {
+        "name": "Hasvalue"
+      },
+      "hasvalue_total": {
+        "name": "Hasvalue Total"
+      },
+      "hasvalue_annual": {
+        "name": "Hasvalue Annual"
+      },
+      "hasvalue_monthly": {
+        "name": "Hasvalue Monthly"
       }
     }
   }

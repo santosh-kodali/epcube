@@ -18,58 +18,6 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
     """Genera i sensori per i dati ricevuti."""
     sensors = []
 
-    specific_names = {
-        "batterysoc": "Battery Charge State",
-        "batterycurrentelectricity": "Battery Energy",
-        "gridpower": "Grid Power",
-        "gridelectricity": "Grid Energy",
-        "solarelectricity": "Solar Energy",
-        "solardcelectricity": "Solar DC Energy",
-        "solaracelectricity": "Solar AC Energy",
-        "solarpower": "Solar Power",
-        "solardcpower": "Solar DC Power",
-        "solaracpower": "Solar AC Power",
-        "backuppower": "Backup Power",
-        "backupelectricity": "Home Consumption Energy",
-        "backupflowpower": "Home Consumption Power",
-        "devid": "EP CUBE ID",
-        "selfhelprate": "EP CUBE Contribution Ratio",
-        "treenum": "Saved Trees",
-        "coal": "Saved Coal",
-        "activationdata": "Activation Date",
-        "warrantydata": "Warranty Expiry",
-        "modeltype": "EP Cube Model",
-        "batterycapacity": "Battery Capacity",
-        "evpower": "EV Power",
-        "evelectricity": "EV Energy",
-        "evflowpower": "EV Delivered Energy",
-        "generatorflowpower": "Generator Delivered Energy",
-        "nonbackupflowpower": "Non-Backup Delivered Energy",
-        "generatorelectricity": "Generator Energy",
-        "generatorpower": "Generator Power",
-        "gridhalfpower": "Partial Grid Power",
-        "gridtotalpower": "Total Grid Power",
-        "nonbackupelectricity": "Non-Backup Energy",
-        "nonbackuppower": "Non-Backup Power",
-        "backuploadsmode": "Backup Load Mode",
-        "backuptype": "Backup Type",
-        "deftimezone": "Default Timezone",
-        "evlight": "EV State",
-        "faultwarningtype": "Alarm Type",
-        "fromtimezone": "Current Timezone",
-        "fromtype": "Origin Type",
-        "generatorlight": "Generator State",
-        "gridlight": "Grid State",
-        "gridpowerfailurenum": "Grid Power Failures",
-        "isalert": "Alert Present",
-        "isfault": "Fault Present",
-        "isnewdevice": "New Device",
-        "payloadversion": "Payload Version",
-        "ressnumber": "Battery Count",
-        "status": "System Status",
-    }
-    
-
     suffix_map = {
         "_total": "Totale",
         "_annual": "Annuale",
@@ -143,7 +91,7 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
     ]
     
     # Normalizza tutte le liste di confronto a lowercase
-    specific_names = {k.lower(): v for k, v in specific_names.items()}
+    #specific_names = {k.lower(): v for k, v in specific_names.items()}
     diagnostic_sensors = [s.lower() for s in diagnostic_sensors]
     disabled_by_default = [s.lower() for s in disabled_by_default]
     instantaneous_kwh_keys = [s.lower() for s in instantaneous_kwh_keys]
@@ -173,10 +121,9 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         if base_key in diagnostic_sensors:
             entity_category = EntityCategory.DIAGNOSTIC
 
-        base_name = specific_names.get(base_key.lower(), base_key.replace("_", " ").title())
-        
-        name = f"{base_name} ({suffix_label})" if suffix_label else base_name
-        
+        #base_name = specific_names.get(base_key.lower(), base_key.replace("_", " ").title())
+        #name = f"{base_name} ({suffix_label})" if suffix_label else base_name
+        translation_key = f"{base_key}_{suffix_label}" if suffix_label else base_key
         
         if base_key in [k.lower() for k in kwh_keys]:
             device_class = SensorDeviceClass.ENERGY
@@ -207,8 +154,7 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
                 entity_category = None
             else:
                 entity_category = EntityCategory.DIAGNOSTIC
-        
-        
+
         elif "flow" in base_key:
             device_class = SensorDeviceClass.ENERGY
             unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
@@ -218,9 +164,6 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
             unit_of_measurement = None
             state_class = None
 
-
-        
-        
         if base_key == "batterysoc":
             entity_registry_enabled_default = True
         elif key_lower.endswith("_annual"):
@@ -235,11 +178,12 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
             entity_registry_enabled_default = False
         else:
             entity_registry_enabled_default = True
-        
-
+            
+        _LOGGER.debug(translation_key)
         sensor = SensorEntityDescription(
             key=key,
-            name=name,
+            translation_key=translation_key,
+            #name=name,
             native_unit_of_measurement=unit_of_measurement,
             device_class=device_class,
             entity_category=entity_category,
@@ -364,7 +308,8 @@ class EpCubeSensor(CoordinatorEntity, SensorEntity):
         self.coordinator = coordinator
         self.entity_description = description
         self._attr_unique_id = f"epcube_{description.key}"
-        self._attr_name = f"EP CUBE {description.name}"
+        self._attr_has_entity_name = True
+        #self._attr_name = f"EP CUBE {description.name}"
         self._attr_unit_of_measurement = description.native_unit_of_measurement
         self._attr_device_class = description.device_class
         self._attr_state_class = description.state_class
