@@ -5,6 +5,8 @@ from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass, SensorEntityDescription, SensorEntity
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.util import dt as dt_util
+from homeassistant.helpers.entity_registry import async_get, RegistryEntryDisabler
+
 
 from .const import DOMAIN, DEFAULT_SCAN_INTERVAL, CONF_ENABLE_TOTAL, CONF_ENABLE_ANNUAL, CONF_ENABLE_MONTHLY, CONF_SCALE_POWER
 import aiohttp
@@ -45,7 +47,7 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         "ressnumber", "version", "evlight", "defcreatetime", "fromcreatetime",
         "gridpowerfailurenum", "activationdata", "warrantydata", "modeltype",
         "allowchargingxiagrid", "daylightsavingtime", "offgridpowersupplytime",
-        "onlysave",
+        "onlysave", "selfhelprate",
         #Sensori di 'tempo di utilizzo'
         "activeweek", "activeweeknonworkday", "activeweeknonworkday",
         "daylightactiveWeek", "dayLightActiveweeknonWorkday", "daytype",
@@ -61,43 +63,10 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         "daylightactiveweek", "dayLightActiveWeekNonWorkDay", "dayType",
         "isDayLightSaving", "weatherWatch",
     ]
-    
-    instantaneous_kwh_keys = [
-        "batterycurrentelectricity",
-        ]
-    
-    # Energia accumulata (kWh)
-    kwh_keys = [
-        "backupelectricity", "solarelectricity", "gridelectricity",
-        "generatorelectricity", "evelectricity", "nonbackupelectricity",
-        "gridelectricity_annual", "solarelectricity_annual", "backupelectricity_annual",
-    ]
 
-    # Flusso energia (kWh, direzionale)
-    flow_kwh_keys = [
-        "evflowpower", "generatorflowpower", "nonbackupflowpower",
-    ]
-    
-
-    w_keys = [
-        "solardcpower", "solaracpower", "backuppower", "solarpower", "gridpower",
-        "generatorpower", "evpower", "nonbackuppower", "gridtotalpower", "gridhalfpower",
-        "backupflowpower",
-    ]
-    
-
-    kw_keys = [
-        "solaracelectricity", "solardcelectricity",
-    ]
-    
-    # Normalizza tutte le liste di confronto a lowercase
-    #specific_names = {k.lower(): v for k, v in specific_names.items()}
     diagnostic_sensors = [s.lower() for s in diagnostic_sensors]
     disabled_by_default = [s.lower() for s in disabled_by_default]
-    instantaneous_kwh_keys = [s.lower() for s in instantaneous_kwh_keys]
-    kwh_keys = [s.lower() for s in kwh_keys]
-    w_keys = [s.lower() for s in w_keys]
-    kw_keys = [s.lower() for s in kw_keys]
+
     disabled_by_variant = {
         k.lower(): [v.lower() for v in vals]
         for k, vals in disabled_by_variant.items()
@@ -115,38 +84,31 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
                 suffix_label = suffix[1:]
                 break
 
+
         if suffix_label in disabled_by_variant.get(base_key, []):
             continue
+            
 
         if base_key in diagnostic_sensors:
             entity_category = EntityCategory.DIAGNOSTIC
 
-        #base_name = specific_names.get(base_key.lower(), base_key.replace("_", " ").title())
-        #name = f"{base_name} ({suffix_label})" if suffix_label else base_name
-        translation_key = f"{base_key}_{suffix_label}" if suffix_label else base_key
+        #ectricity = kWh
+        #power = kW (none)
+        #power (i numeri arrivano in watt) = W
         
-        if base_key in [k.lower() for k in kwh_keys]:
+        if "electricity" in base_key or "flow" in base_key:  # kWh
+            _LOGGER.debug("Energy kWh: %s", base_key)
             device_class = SensorDeviceClass.ENERGY
             unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
             state_class = SensorStateClass.TOTAL_INCREASING
-        elif base_key in [k.lower() for k in flow_kwh_keys]:
-            device_class = SensorDeviceClass.ENERGY
-            unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
-            state_class = SensorStateClass.TOTAL_INCREASING
-        elif base_key in [k.lower() for k in w_keys]:
+        elif "power" in base_key:  # kW
+            _LOGGER.debug("Power kW: %s", base_key)
             device_class = SensorDeviceClass.POWER
-            unit_of_measurement = UnitOfPower.WATT
+            unit_of_measurement = UnitOfPower.WATT #KILO_WATT
             state_class = SensorStateClass.MEASUREMENT
-        elif base_key in [k.lower() for k in kw_keys]:
-            device_class = SensorDeviceClass.POWER
-            unit_of_measurement = UnitOfPower.KILO_WATT
-            state_class = SensorStateClass.MEASUREMENT
-        elif base_key in [k.lower() for k in instantaneous_kwh_keys]:
-            device_class = SensorDeviceClass.ENERGY
-            unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
-            state_class = SensorStateClass.TOTAL_INCREASING
+
         elif "soc" in base_key:
-            #device_class = SensorDeviceClass.BATTERY
+            #device_class = SensorDeviceClass.BATTERY #Causa problema con la batteria epcbube
             unit_of_measurement = PERCENTAGE
             state_class = SensorStateClass.MEASUREMENT
             
@@ -156,10 +118,6 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
             else:
                 entity_category = EntityCategory.DIAGNOSTIC
 
-        elif "flow" in base_key:
-            device_class = SensorDeviceClass.ENERGY
-            unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
-            state_class = SensorStateClass.TOTAL_INCREASING
         else:
             device_class = None
             unit_of_measurement = None
@@ -167,24 +125,26 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
 
         if base_key == "batterysoc":
             entity_registry_enabled_default = True
+
         elif key_lower.endswith("_annual"):
             entity_registry_enabled_default = enable_annual
         elif key_lower.endswith("_monthly"):
             entity_registry_enabled_default = enable_monthly
         elif key_lower.endswith("_total"):
             entity_registry_enabled_default = enable_total
+
         elif value is None:
             entity_registry_enabled_default = False
         elif base_key in disabled_by_default:
             entity_registry_enabled_default = False
         else:
             entity_registry_enabled_default = True
-            
-        _LOGGER.debug(translation_key)
+
+        # Creazione della descrizione del sensore
+        translation_key = f"{base_key}_{suffix_label}" if suffix_label else base_key
         sensor = SensorEntityDescription(
             key=key,
             translation_key=translation_key,
-            #name=name,
             native_unit_of_measurement=unit_of_measurement,
             device_class=device_class,
             entity_category=entity_category,
@@ -224,7 +184,7 @@ async def fetch_epcube_stats(session, token, dev_id, date_str, scope_type):
 
     async with session.get(url, headers=headers) as resp:
         json_data = await resp.json()
-        #_LOGGER.debug("Risposta JSON (%s - %s): %s", scope_type, date_str, json_data)
+        _LOGGER.debug("Risposta JSON (%s - %s): %s", scope_type, date_str, json_data)
         raw_data = json_data.get("data", {})
         normalized = {k.lower(): v for k, v in raw_data.items()}
         return normalized
@@ -295,6 +255,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
 
     filtered_data = coordinator.data["data"]
     
+    # Genera i sensori
     sensors = generate_sensors(
         filtered_data,
         enable_total=enable_total,
@@ -302,14 +263,37 @@ async def async_setup_entry(hass, entry, async_add_entities):
         enable_monthly=enable_monthly
     )
 
-    entities = [EpCubeLastUpdateSensor(coordinator)]
+    # Aggiungi i sensori al sistema
+    entities = []  # Lista per raccogliere le entità
+
     for sensor in sensors:
-        entities.append(EpCubeSensor(coordinator, sensor, scale_power=scale_power))
-    
+        # Crea l'istanza del sensore
+        entity = EpCubeSensor(coordinator, sensor, scale_power=scale_power)
 
+        # Aggiungi l'entità alla lista delle entità
+        entities.append(entity)
+
+    # Aggiungi l'entità di aggiornamento
+    entities.append(EpCubeLastUpdateSensor(coordinator))
+
+    # Aggiungi tutte le entità a Home Assistant
     async_add_entities(entities, True)
-    return True
 
+    # Ottieni il registro delle entità
+    entity_registry = async_get(hass)
+
+    # Dopo che tutte le entità sono state aggiunte, aggiorna il loro stato
+    for entity in entities:
+        if entity.entity_id is not None:  # Verifica che l'entity_id non sia None
+            # Disabilita i sensori annuali se il flag annuale è disabilitato
+            if "_annual" in entity.entity_id and not enable_annual:
+                entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
+            elif "_monthly" in entity.entity_id and not enable_monthly:
+                entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
+            elif "_total" in entity.entity_id and not enable_total:
+                entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
+
+    return True
 
 class EpCubeSensor(CoordinatorEntity, SensorEntity):
     def __init__(self, coordinator, description, scale_power=False):
