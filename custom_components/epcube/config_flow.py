@@ -93,7 +93,6 @@ class EpCubeOptionsFlow(config_entries.OptionsFlow):
             data_schema=vol.Schema({
                 vol.Optional("token", default=self._config_entry.data.get("token")): str,
                 vol.Optional("scan_interval", default=self._config_entry.options.get("scan_interval", DEFAULT_SCAN_INTERVAL)): int,
-                vol.Optional(CONF_SCALE_POWER, default=self._config_entry.options.get(CONF_SCALE_POWER, False)): bool,
                 vol.Optional(CONF_ENABLE_TOTAL, default=self._config_entry.options.get(CONF_ENABLE_TOTAL, False)): bool,
                 vol.Optional(CONF_ENABLE_ANNUAL, default=self._config_entry.options.get(CONF_ENABLE_ANNUAL, False)): bool,
                 vol.Optional(CONF_ENABLE_MONTHLY, default=self._config_entry.options.get(CONF_ENABLE_MONTHLY, False)): bool,

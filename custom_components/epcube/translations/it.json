@@ -14,7 +14,6 @@
         "data": {
           "token": "Token EPCUBE",
           "scan_interval": "Frequenza aggiornamento dati",
-          "scale_power": "Moltiplica i valori di potenza (*1000)",
           "enable_total": "Abilita tutti i sensori totali",
           "enable_annual": "Abilita tutti i sensori annuali",
           "enable_monthly": "Abilita tutti i sensori mensili"
@@ -40,19 +39,19 @@
         "name": "Batteria Energia Corrente"
       },
       "gridpowerfailurenum": {
-        "name": "Rete Power Fallimento"
+        "name": "Rete Potenza Fallimento"
       },
       "offgridpowersupplytime": {
         "name": "Offgrid tempo di fornitura energia"
       },
       "gridpower": {
-        "name": "Rete Power"
+        "name": "Rete Potenza"
       },
       "gridelectricity": {
         "name": "Rete Energia"
       },
       "solarpower": {
-        "name": "Solare Power"
+        "name": "Solare Potenza"
       },
       "solarelectricity": {
         "name": "Solare Energia Totale"
@@ -64,28 +63,28 @@
         "name": "Solare AC Energia"
       },
       "generatorpower": {
-        "name": "Generatore Power"
+        "name": "Generatore Potenza"
       },
       "generatorelectricity": {
         "name": "Generatore Energia"
       },
       "evpower": {
-        "name": "Veicolo Elettrico Power"
+        "name": "Veicolo Elettrico Potenza"
       },
       "evelectricity": {
         "name": "Veicolo Elettrico Energia"
       },
       "nonbackuppower": {
-        "name": "Non Backup Power"
+        "name": "Non Backup Potenza"
       },
       "nonbackupelectricity": {
         "name": "Non Backup Energia"
       },
       "backuppower": {
-        "name": "Casa Power"
+        "name": "Consumi Casa Potenza"
       },
       "backupelectricity": {
-        "name": "Casa Energia"
+        "name": "Consumi Casa Energia"
       },
       "selfhelprate": {
         "name": "Rapporto Contributo EPCUBE"
@@ -139,31 +138,31 @@
         "name": "Versione Payload"
       },
       "gridtotalpower": {
-        "name": "Rete Power Totale"
+        "name": "Rete Potenza Totale"
       },
       "gridhalfpower": {
-        "name": "Rete Metà Power"
+        "name": "Rete Metà Potenza"
       },
       "solarflow": {
         "name": "Solare Flow"
       },
       "solaracpower": {
-        "name": "Solare AC Power"
+        "name": "Solare AC Potenza"
       },
       "solardcpower": {
-        "name": "Solare DC Power"
+        "name": "Solare DC Potenza"
       },
       "generatorflowpower": {
-        "name": "Generatore Power Flow"
+        "name": "Generatore Potenza Flow"
       },
       "evflowpower": {
-        "name": "Veicolo Elettrico Power Flow"
+        "name": "Veicolo Elettrico Potenza Flow"
       },
       "nonbackupflowpower": {
-        "name": "Non Backup Power Flow"
+        "name": "Non Backup Potenza Flow"
       },
       "backupflowpower": {
-        "name": "Casa Power Flow"
+        "name": "Consumi Casa Potenza Flow"
       },
       "backuploadsmode": {
         "name": "Casa Modalità Caricamento"
@@ -181,7 +180,7 @@
         "name": "Onlysave"
       },
       "backuppowerreservesoc": {
-        "name": "Casa Riserva Power Soc"
+        "name": "Casa Riserva Potenza Soc"
       },
       "selfconsumptioinreservesoc": {
         "name": "Autoconsumo Riserva Soc"
@@ -286,13 +285,13 @@
         "name": "Batteria Energia Corrente (Mensile)"
       },
       "gridpowerfailurenum_total": {
-        "name": "Rete Power Fallimento (Totale)"
+        "name": "Rete Potenza Fallimento (Totale)"
       },
       "gridpowerfailurenum_annual": {
-        "name": "Rete Power Fallimento (Annuale)"
+        "name": "Rete Potenza Fallimento (Annuale)"
       },
       "gridpowerfailurenum_monthly": {
-        "name": "Rete Power Fallimento (Mensile)"
+        "name": "Rete Potenza Fallimento (Mensile)"
       },
       "offgridpowersupplytime_total": {
         "name": "Offgrid tempo di fornitura energia (Totale)"
@@ -304,13 +303,13 @@
         "name": "Offgrid tempo di fornitura energia (Mensile)"
       },
       "gridpower_total": {
-        "name": "Rete Power (Totale)"
+        "name": "Rete Potenza (Totale)"
       },
       "gridpower_annual": {
-        "name": "Rete Power (Annuale)"
+        "name": "Rete Potenza (Annuale)"
       },
       "gridpower_monthly": {
-        "name": "Rete Power (Mensile)"
+        "name": "Rete Potenza (Mensile)"
       },
       "gridelectricity_total": {
         "name": "Rete Energia (Totale)"
@@ -322,13 +321,13 @@
         "name": "Rete Energia (Mensile)"
       },
       "solarpower_total": {
-        "name": "Solare Power (Totale)"
+        "name": "Solare Potenza (Totale)"
       },
       "solarpower_annual": {
-        "name": "Solare Power (Annuale)"
+        "name": "Solare Potenza (Annuale)"
       },
       "solarpower_monthly": {
-        "name": "Solare Power (Mensile)"
+        "name": "Solare Potenza (Mensile)"
       },
       "solarelectricity_total": {
         "name": "Solare Energia Totale (Totale)"
@@ -358,13 +357,13 @@
         "name": "Solare AC Energia (Mensile)"
       },
       "generatorpower_total": {
-        "name": "Generatore Power (Totale)"
+        "name": "Generatore Potenza (Totale)"
       },
       "generatorpower_annual": {
-        "name": "Generatore Power (Annuale)"
+        "name": "Generatore Potenza (Annuale)"
       },
       "generatorpower_monthly": {
-        "name": "Generatore Power (Mensile)"
+        "name": "Generatore Potenza (Mensile)"
       },
       "generatorelectricity_total": {
         "name": "Generatore Energia (Totale)"
@@ -376,13 +375,13 @@
         "name": "Generatore Energia (Mensile)"
       },
       "evpower_total": {
-        "name": "Veicolo Elettrico Power (Totale)"
+        "name": "Veicolo Elettrico Potenza (Totale)"
       },
       "evpower_annual": {
-        "name": "Veicolo Elettrico Power (Annuale)"
+        "name": "Veicolo Elettrico Potenza (Annuale)"
       },
       "evpower_monthly": {
-        "name": "Veicolo Elettrico Power (Mensile)"
+        "name": "Veicolo Elettrico Potenza (Mensile)"
       },
       "evelectricity_total": {
         "name": "Veicolo Elettrico Energia (Totale)"
@@ -394,13 +393,13 @@
         "name": "Veicolo Elettrico Energia (Mensile)"
       },
       "nonbackuppower_total": {
-        "name": "Non Backup Power (Totale)"
+        "name": "Non Backup Potenza (Totale)"
       },
       "nonbackuppower_annual": {
-        "name": "Non Backup Power (Annuale)"
+        "name": "Non Backup Potenza (Annuale)"
       },
       "nonbackuppower_monthly": {
-        "name": "Non Backup Power (Mensile)"
+        "name": "Non Backup Potenza (Mensile)"
       },
       "nonbackupelectricity_total": {
         "name": "Non Backup Energia (Totale)"
@@ -412,13 +411,13 @@
         "name": "Non Backup Energia (Mensile)"
       },
       "backuppower_total": {
-        "name": "Casa Power (Totale)"
+        "name": "Casa Potenza (Totale)"
       },
       "backuppower_annual": {
-        "name": "Casa Power (Annuale)"
+        "name": "Casa Potenza (Annuale)"
       },
       "backuppower_monthly": {
-        "name": "Casa Power (Mensile)"
+        "name": "Casa Potenza (Mensile)"
       },
       "backupelectricity_total": {
         "name": "Casa Energia (Totale)"
@@ -583,22 +582,22 @@
         "name": "Versione Payload (Mensile)"
       },
       "gridtotalpower_total": {
-        "name": "Rete Power Totale (Totale)"
+        "name": "Rete Potenza Totale (Totale)"
       },
       "gridtotalpower_annual": {
-        "name": "Rete Power Totale (Annuale)"
+        "name": "Rete Potenza Totale (Annuale)"
       },
       "gridtotalpower_monthly": {
-        "name": "Rete Power Totale (Mensile)"
+        "name": "Rete Potenza Totale (Mensile)"
       },
       "gridhalfpower_total": {
-        "name": "Rete Metà Power (Totale)"
+        "name": "Rete Metà Potenza (Totale)"
       },
       "gridhalfpower_annual": {
-        "name": "Rete Metà Power (Annuale)"
+        "name": "Rete Metà Potenza (Annuale)"
       },
       "gridhalfpower_monthly": {
-        "name": "Rete Metà Power (Mensile)"
+        "name": "Rete Metà Potenza (Mensile)"
       },
       "solarflow_total": {
         "name": "Solare Flow (Totale)"
@@ -610,58 +609,58 @@
         "name": "Solare Flow (Mensile)"
       },
       "solaracpower_total": {
-        "name": "Solare AC Power (Totale)"
+        "name": "Solare AC Potenza (Totale)"
       },
       "solaracpower_annual": {
-        "name": "Solare AC Power (Annuale)"
+        "name": "Solare AC Potenza (Annuale)"
       },
       "solaracpower_monthly": {
-        "name": "Solare AC Power (Mensile)"
+        "name": "Solare AC Potenza (Mensile)"
       },
       "solardcpower_total": {
-        "name": "Solare DC Power (Totale)"
+        "name": "Solare DC Potenza (Totale)"
       },
       "solardcpower_annual": {
-        "name": "Solare DC Power (Annuale)"
+        "name": "Solare DC Potenza (Annuale)"
       },
       "solardcpower_monthly": {
-        "name": "Solare DC Power (Mensile)"
+        "name": "Solare DC Potenza (Mensile)"
       },
       "generatorflowpower_total": {
-        "name": "Generatore Power Flow (Totale)"
+        "name": "Generatore Potenza Flow (Totale)"
       },
       "generatorflowpower_annual": {
-        "name": "Generatore Power Flow (Annuale)"
+        "name": "Generatore Potenza Flow (Annuale)"
       },
       "generatorflowpower_monthly": {
-        "name": "Generatore Power Flow (Mensile)"
+        "name": "Generatore Potenza Flow (Mensile)"
       },
       "evflowpower_total": {
-        "name": "Veicolo Elettrico Power Flow (Totale)"
+        "name": "Veicolo Elettrico Potenza Flow (Totale)"
       },
       "evflowpower_annual": {
-        "name": "Veicolo Elettrico Power Flow (Annuale)"
+        "name": "Veicolo Elettrico Potenza Flow (Annuale)"
       },
       "evflowpower_monthly": {
-        "name": "Veicolo Elettrico Power Flow (Mensile)"
+        "name": "Veicolo Elettrico Potenza Flow (Mensile)"
       },
       "nonbackupflowpower_total": {
-        "name": "Non Backup Power Flow (Totale)"
+        "name": "Non Backup Potenza Flow (Totale)"
       },
       "nonbackupflowpower_annual": {
-        "name": "Non Backup Power Flow (Annuale)"
+        "name": "Non Backup Potenza Flow (Annuale)"
       },
       "nonbackupflowpower_monthly": {
-        "name": "Non Backup Power Flow (Mensile)"
+        "name": "Non Backup Potenza Flow (Mensile)"
       },
       "backupflowpower_total": {
-        "name": "Casa Power Flow (Totale)"
+        "name": "Casa Potenza Flow (Totale)"
       },
       "backupflowpower_annual": {
-        "name": "Casa Power Flow (Annuale)"
+        "name": "Casa Potenza Flow (Annuale)"
       },
       "backupflowpower_monthly": {
-        "name": "Casa Power Flow (Mensile)"
+        "name": "Casa Potenza Flow (Mensile)"
       },
       "backuploadsmode_total": {
         "name": "Casa Modalità Caricamento (Totale)"
@@ -709,13 +708,13 @@
         "name": "Onlysave (Mensile)"
       },
       "backuppowerreservesoc_total": {
-        "name": "Casa Riserva Power Soc (Totale)"
+        "name": "Casa Riserva Potenza Soc (Totale)"
       },
       "backuppowerreservesoc_annual": {
-        "name": "Casa Riserva Power Soc (Annuale)"
+        "name": "Casa Riserva Potenza Soc (Annuale)"
       },
       "backuppowerreservesoc_monthly": {
-        "name": "Casa Riserva Power Soc (Mensile)"
+        "name": "Casa Riserva Potenza Soc (Mensile)"
       },
       "selfconsumptioinreservesoc_total": {
         "name": "Autoconsumo Riserva Soc (Totale)"

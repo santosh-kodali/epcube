@@ -8,7 +8,7 @@ from homeassistant.util import dt as dt_util
 from homeassistant.helpers.entity_registry import async_get, RegistryEntryDisabler
 
 
-from .const import DOMAIN, DEFAULT_SCAN_INTERVAL, CONF_ENABLE_TOTAL, CONF_ENABLE_ANNUAL, CONF_ENABLE_MONTHLY, CONF_SCALE_POWER
+from .const import DOMAIN, DEFAULT_SCAN_INTERVAL, CONF_ENABLE_TOTAL, CONF_ENABLE_ANNUAL, CONF_ENABLE_MONTHLY
 import aiohttp
 import async_timeout
 from datetime import timedelta, datetime
@@ -38,7 +38,6 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         "solardcelectricity": ["annual", "monthly", "total"],
         "solaracelectricity": ["annual", "monthly", "total"],
     }
-    
     diagnostic_sensors = [
         "status", "systemstatus", "workstatus", "isalert", "isfault",
         "backuploadsmode", "backuptype", "deftimezone", "devid",
@@ -52,7 +51,7 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         "activeweek", "activeweeknonworkday", "activeweeknonworkday",
         "daylightactiveWeek", "dayLightActiveweeknonWorkday", "daytype",
         "isDayLightSaving", "weatherWatch",
-    ] 
+    ]
 
     disabled_by_default = [
         "defcreatetime", "fromcreatetime",
@@ -71,7 +70,7 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         k.lower(): [v.lower() for v in vals]
         for k, vals in disabled_by_variant.items()
     }
-    
+
     for key, value in data.items():
         key_lower = key.lower()
         entity_category = None  # inizializza sempre
@@ -84,10 +83,8 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
                 suffix_label = suffix[1:]
                 break
 
-
         if suffix_label in disabled_by_variant.get(base_key, []):
             continue
-            
 
         if base_key in diagnostic_sensors:
             entity_category = EntityCategory.DIAGNOSTIC
@@ -101,8 +98,8 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
             device_class = SensorDeviceClass.ENERGY
             unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
             state_class = SensorStateClass.TOTAL_INCREASING
-        elif "power" in base_key:  # kW
-            _LOGGER.debug("Power kW: %s", base_key)
+        elif "power" in base_key:  # W
+            _LOGGER.debug("Power W: %s", base_key)
             device_class = SensorDeviceClass.POWER
             unit_of_measurement = UnitOfPower.WATT #KILO_WATT
             state_class = SensorStateClass.MEASUREMENT
@@ -111,7 +108,7 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
             #device_class = SensorDeviceClass.BATTERY #Causa problema con la batteria epcbube
             unit_of_measurement = PERCENTAGE
             state_class = SensorStateClass.MEASUREMENT
-            
+
             if base_key == "batterysoc":
                 device_class = SensorDeviceClass.BATTERY
                 entity_category = None
@@ -140,7 +137,6 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         else:
             entity_registry_enabled_default = True
 
-        # Creazione della descrizione del sensore
         translation_key = f"{base_key}_{suffix_label}" if suffix_label else base_key
         sensor = SensorEntityDescription(
             key=key,
@@ -247,8 +243,6 @@ async def async_setup_entry(hass, entry, async_add_entities):
     enable_annual = options.get(CONF_ENABLE_ANNUAL, False)
     enable_monthly = options.get(CONF_ENABLE_MONTHLY, False)
 
-    scale_power = options.get("scale_power", False)
-
     if not coordinator.data or "data" not in coordinator.data:
         _LOGGER.warning("Nessun dato disponibile dal coordinator, sensori non creati.")
         return
@@ -268,7 +262,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
 
     for sensor in sensors:
         # Crea l'istanza del sensore
-        entity = EpCubeSensor(coordinator, sensor, scale_power=scale_power)
+        entity = EpCubeSensor(coordinator, sensor)
 
         # Aggiungi l'entità alla lista delle entità
         entities.append(entity)
@@ -296,11 +290,10 @@ async def async_setup_entry(hass, entry, async_add_entities):
     return True
 
 class EpCubeSensor(CoordinatorEntity, SensorEntity):
-    def __init__(self, coordinator, description, scale_power=False):
+    def __init__(self, coordinator, description):
         super().__init__(coordinator)
         self.coordinator = coordinator
         self.entity_description = description
-        self.scale_power = scale_power
         self._attr_unique_id = f"epcube_{description.key}"
         self._attr_has_entity_name = True
         #self._attr_name = f"EP CUBE {description.name}"
@@ -320,20 +313,7 @@ class EpCubeSensor(CoordinatorEntity, SensorEntity):
 
     @property
     def native_value(self):
-        value = self.coordinator.data["data"].get(self.entity_description.key)
-    
-        if value is not None and self.scale_power:
-            if isinstance(value, (int, float)):
-                if self.entity_description.native_unit_of_measurement in [
-                    UnitOfPower.WATT,
-                    UnitOfPower.KILO_WATT,
-                    UnitOfEnergy.KILO_WATT_HOUR,
-                ]:
-                    return round(value * 1000, 3)
-        return value
-    
-    
-    
+        return self.coordinator.data["data"].get(self.entity_description.key)
 
 class EpCubeLastUpdateSensor(CoordinatorEntity, SensorEntity):
     def __init__(self, coordinator):
