@@ -73,7 +73,7 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
 
     for key, value in data.items():
         key_lower = key.lower()
-        entity_category = None  # inizializza sempre
+        entity_category = None
 
         suffix_label = ""
         base_key = key_lower
@@ -94,12 +94,12 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         #power (i numeri arrivano in watt) = W
         
         if "electricity" in base_key or "flow" in base_key:  # kWh
-            _LOGGER.debug("Energy kWh: %s", base_key)
+            #_LOGGER.debug("Energy kWh: %s", base_key)
             device_class = SensorDeviceClass.ENERGY
             unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
             state_class = SensorStateClass.TOTAL_INCREASING
         elif "power" in base_key:  # W
-            _LOGGER.debug("Power W: %s", base_key)
+            #_LOGGER.debug("Power W: %s", base_key)
             device_class = SensorDeviceClass.POWER
             unit_of_measurement = UnitOfPower.WATT #KILO_WATT
             state_class = SensorStateClass.MEASUREMENT
@@ -180,9 +180,10 @@ async def fetch_epcube_stats(session, token, dev_id, date_str, scope_type):
 
     async with session.get(url, headers=headers) as resp:
         json_data = await resp.json()
-        _LOGGER.debug("Risposta JSON (%s - %s): %s", scope_type, date_str, json_data)
+        #_LOGGER.debug("Risposta JSON (%s - %s): %s", scope_type, date_str, json_data)
         raw_data = json_data.get("data", {})
         normalized = {k.lower(): v for k, v in raw_data.items()}
+        #_LOGGER.debug("Nomalized: %s" %normalized)
         return normalized
 
 async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
@@ -194,6 +195,7 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
 
                 live_data = await resp.json()
                 full_data_raw = live_data.get("data", {})
+                #_LOGGER.debug("Full Data: %s", %full_data_raw)
                 full_data = {k.lower(): v for k, v in full_data_raw.items()}
                 real_dev_id = full_data.get("devid")
 
@@ -208,20 +210,17 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
                 
                 device_info = await fetch_device_info(session, token, real_dev_id)
                 
-                # Aggiungi dati di configurazione (getSwitchMode)
                 switch_url = f"https://monitoring-eu.epcube.com/api/device/getSwitchMode?devId={real_dev_id}"
                 async with session.get(switch_url, headers=headers) as switch_resp:
                     switch_json = await switch_resp.json()
-                    _LOGGER.debug("Risposta getSwitchMode: %s", switch_json)
+                    #_LOGGER.debug("Risposta getSwitchMode: %s", switch_json)
                     switch_data = switch_json.get("data", {})
                     for k, v in switch_data.items():
                         full_data[k.lower()] = v  # Normalizza in lowercase
                 
-                # Aggiungi dati rilevanti come nuovi campi nel full_data
                 for k in ["activationdata", "warrantydata", "modeltype", "batterycapacity"]:
                     full_data[k] = device_info.get(k)
                     
-                # Aggiungi suffissi
                 for k, v in total_data.items():
                     full_data[f"{k}_total"] = v
                 for k, v in annual_data.items():
@@ -233,7 +232,7 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
                 return {"data": full_data}
 
     except Exception as err:
-        _LOGGER.error("Errore nell'aggiornamento dei dati: %s", err)
+        #_LOGGER.error("Errore nell'aggiornamento dei dati: %s", err)
         raise UpdateFailed(f"Errore nell'aggiornamento dei dati: {err}")
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -244,12 +243,11 @@ async def async_setup_entry(hass, entry, async_add_entities):
     enable_monthly = options.get(CONF_ENABLE_MONTHLY, False)
 
     if not coordinator.data or "data" not in coordinator.data:
-        _LOGGER.warning("Nessun dato disponibile dal coordinator, sensori non creati.")
+        #_LOGGER.warning("Nessun dato disponibile dal coordinator, sensori non creati.")
         return
 
     filtered_data = coordinator.data["data"]
     
-    # Genera i sensori
     sensors = generate_sensors(
         filtered_data,
         enable_total=enable_total,
@@ -257,36 +255,37 @@ async def async_setup_entry(hass, entry, async_add_entities):
         enable_monthly=enable_monthly
     )
 
-    # Aggiungi i sensori al sistema
-    entities = []  # Lista per raccogliere le entità
+    entities = []
 
     for sensor in sensors:
-        # Crea l'istanza del sensore
         entity = EpCubeSensor(coordinator, sensor)
 
-        # Aggiungi l'entità alla lista delle entità
         entities.append(entity)
 
-    # Aggiungi l'entità di aggiornamento
     entities.append(EpCubeLastUpdateSensor(coordinator))
 
-    # Aggiungi tutte le entità a Home Assistant
     async_add_entities(entities, True)
 
-    # Ottieni il registro delle entità
     entity_registry = async_get(hass)
 
-    # Dopo che tutte le entità sono state aggiunte, aggiorna il loro stato
     for entity in entities:
-        if entity.entity_id is not None:  # Verifica che l'entity_id non sia None
-            # Disabilita i sensori annuali se il flag annuale è disabilitato
-            if "_annual" in entity.entity_id and not enable_annual:
-                entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
-            elif "_monthly" in entity.entity_id and not enable_monthly:
-                entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
-            elif "_total" in entity.entity_id and not enable_total:
-                entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
-
+        if entity.entity_id is not None:
+            if "_annual" in entity.entity_id:
+                if enable_annual:
+                    entity_registry.async_update_entity(entity.entity_id, disabled_by=None)
+                else:
+                    entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
+            elif "_monthly" in entity.entity_id:
+                if enable_monthly:
+                    entity_registry.async_update_entity(entity.entity_id, disabled_by=None)
+                else:
+                    entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
+            elif "_total" in entity.entity_id:
+                if enable_total:
+                    entity_registry.async_update_entity(entity.entity_id, disabled_by=None)
+                else:
+                    entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
+            
     return True
 
 class EpCubeSensor(CoordinatorEntity, SensorEntity):
@@ -311,9 +310,20 @@ class EpCubeSensor(CoordinatorEntity, SensorEntity):
             "configuration_url": "https://monitoring-eu.epcube.com/"
         }
 
+
     @property
     def native_value(self):
-        return self.coordinator.data["data"].get(self.entity_description.key)
+        value = self.coordinator.data["data"].get(self.entity_description.key)
+
+        if value is not None:
+            if self.entity_description.device_class == SensorDeviceClass.POWER:
+                try:
+                    return round(float(value) * 10, 1)
+                except (ValueError, TypeError):
+                    return None
+        return value
+    
+    
 
 class EpCubeLastUpdateSensor(CoordinatorEntity, SensorEntity):
     def __init__(self, coordinator):
