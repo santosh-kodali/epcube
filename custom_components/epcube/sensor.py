@@ -105,7 +105,6 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
             state_class = SensorStateClass.MEASUREMENT
 
         elif "soc" in base_key:
-            #device_class = SensorDeviceClass.BATTERY #Causa problema con la batteria epcbube
             unit_of_measurement = PERCENTAGE
             state_class = SensorStateClass.MEASUREMENT
 
@@ -193,9 +192,9 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
                 if resp.content_type != "application/json":
                     raise UpdateFailed(f"Tipo MIME non gestito: {resp.content_type}")
 
+
                 live_data = await resp.json()
                 full_data_raw = live_data.get("data", {})
-                #_LOGGER.debug("Full Data: %s", %full_data_raw)
                 full_data = {k.lower(): v for k, v in full_data_raw.items()}
                 real_dev_id = full_data.get("devid")
 
@@ -203,26 +202,25 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
                 year_str = str(now.year)
                 month_str = now.strftime("%Y-%m")
                 today_str = now.strftime("%Y-%m-%d")
-                
-                # Statistiche: live (scopeType=1), totale (scopeType=0), annuale (3), mensile (2)
+
+
                 live_data = await fetch_epcube_stats(session, token, real_dev_id, today_str, 1)
                 total_data = await fetch_epcube_stats(session, token, real_dev_id, year_str, 0)
                 annual_data = await fetch_epcube_stats(session, token, real_dev_id, year_str, 3)
                 monthly_data = await fetch_epcube_stats(session, token, real_dev_id, month_str, 2)
                 
                 device_info = await fetch_device_info(session, token, real_dev_id)
-                
+
                 switch_url = f"https://monitoring-eu.epcube.com/api/device/getSwitchMode?devId={real_dev_id}"
                 async with session.get(switch_url, headers=headers) as switch_resp:
                     switch_json = await switch_resp.json()
-                    #_LOGGER.debug("Risposta getSwitchMode: %s", switch_json)
                     switch_data = switch_json.get("data", {})
                     for k, v in switch_data.items():
-                        full_data[k.lower()] = v  # Normalizza in lowercase
-                
+                        full_data[k.lower()] = v
+
                 for k in ["activationdata", "warrantydata", "modeltype", "batterycapacity"]:
                     full_data[k] = device_info.get(k)
-                 
+
                 INCLUDED_LIVE_KEYS = {
                     "gridelectricity", "gridelectricityfrom", "gridelectricityto",
                     "solarelectricity", "backupelectricity", "selfhelprate", "treenum", "coal",
@@ -232,7 +230,7 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
                     key_lower = k.lower()
                     if key_lower in INCLUDED_LIVE_KEYS:
                         full_data[key_lower] = v
-                
+
                 for k, v in total_data.items():
                     full_data[f"{k}_total"] = v
                 for k, v in annual_data.items():
@@ -240,11 +238,9 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
                 for k, v in monthly_data.items():
                     full_data[f"{k}_monthly"] = v
 
-                #_LOGGER.debug("Dati finali unificati (live + total + annual + monthly): %s", full_data)
                 return {"data": full_data}
 
     except Exception as err:
-        #_LOGGER.error("Errore nell'aggiornamento dei dati: %s", err)
         raise UpdateFailed(f"Errore nell'aggiornamento dei dati: {err}")
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -255,7 +251,6 @@ async def async_setup_entry(hass, entry, async_add_entities):
     enable_monthly = options.get(CONF_ENABLE_MONTHLY, False)
 
     if not coordinator.data or "data" not in coordinator.data:
-        #_LOGGER.warning("Nessun dato disponibile dal coordinator, sensori non creati.")
         return
 
     filtered_data = coordinator.data["data"]
@@ -306,18 +301,17 @@ class EpCubeSensor(CoordinatorEntity, SensorEntity):
         self.coordinator = coordinator
         self.entity_description = description
         self._attr_unique_id = f"epcube_{description.key}"
+        self._attr_entity_id = f"sensor.epcube_{description.key}"
         self._attr_has_entity_name = True
-        #self._attr_name = f"EP CUBE {description.name}"
         self._attr_unit_of_measurement = description.native_unit_of_measurement
         self._attr_device_class = description.device_class
         self._attr_state_class = description.state_class
         self._attr_entity_category = description.entity_category
-        self._attr_entity_id = f"sensor.epcubes_{description.key}"
         self._attr_device_info = {
             "identifiers": {("epcube", "epcube_device")},
-            "name": "EP CUBE",
+            "name": "EPCUBE",
             "manufacturer": "CanadianSolar",
-            "model": "EP CUBE",
+            "model": "EPCUBE",
             "entry_type": "service",
             "configuration_url": "https://monitoring-eu.epcube.com/"
         }
@@ -334,8 +328,6 @@ class EpCubeSensor(CoordinatorEntity, SensorEntity):
                 except (ValueError, TypeError):
                     return None
         return value
-    
-    
 
 class EpCubeLastUpdateSensor(CoordinatorEntity, SensorEntity):
     def __init__(self, coordinator):

@@ -1,6 +1,6 @@
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from .const import DOMAIN, PLATFORMS
+from .const import DOMAIN, PLATFORMS, DEFAULT_SCAN_INTERVAL
 from .sensor import async_update_data_with_stats
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
@@ -9,14 +9,13 @@ import logging
 
 _LOGGER = logging.getLogger(__name__)
 
-
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if DOMAIN not in hass.data:
         hass.data[DOMAIN] = {}
 
     token = entry.data["token"]
     sn = entry.data["sn"]
-    scan_interval = entry.options.get("scan_interval", 30)
+    scan_interval = entry.options.get("scan_interval", DEFAULT_SCAN_INTERVAL)
 
     session = async_get_clientsession(hass)
     url = f"https://monitoring-eu.epcube.com/api/device/homeDeviceInfo?&sgSn={sn}"
@@ -48,9 +47,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 
-
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    for platform in PLATFORMS:
-        await hass.config_entries.async_forward_entry_unload(entry, platform)
-    hass.data[DOMAIN].pop(entry.entry_id, None)
-    return True
+    unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
+    if unload_ok:
+        coordinator = hass.data[DOMAIN][entry.entry_id]["coordinator"]
+        hass.data[DOMAIN].pop(entry.entry_id, None)
+    return unload_ok
