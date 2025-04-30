@@ -202,8 +202,10 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
                 now = datetime.now()
                 year_str = str(now.year)
                 month_str = now.strftime("%Y-%m")
-
-                # Statistiche: totale (scopeType=0), annuale (3), mensile (2)
+                today_str = now.strftime("%Y-%m-%d")
+                
+                # Statistiche: live (scopeType=1), totale (scopeType=0), annuale (3), mensile (2)
+                live_data = await fetch_epcube_stats(session, token, real_dev_id, today_str, 1)
                 total_data = await fetch_epcube_stats(session, token, real_dev_id, year_str, 0)
                 annual_data = await fetch_epcube_stats(session, token, real_dev_id, year_str, 3)
                 monthly_data = await fetch_epcube_stats(session, token, real_dev_id, month_str, 2)
@@ -220,7 +222,17 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
                 
                 for k in ["activationdata", "warrantydata", "modeltype", "batterycapacity"]:
                     full_data[k] = device_info.get(k)
-                    
+                 
+                INCLUDED_LIVE_KEYS = {
+                    "gridelectricity", "gridelectricityfrom", "gridelectricityto",
+                    "solarelectricity", "backupelectricity", "selfhelprate", "treenum", "coal",
+                }
+
+                for k, v in live_data.items():
+                    key_lower = k.lower()
+                    if key_lower in INCLUDED_LIVE_KEYS:
+                        full_data[key_lower] = v
+                
                 for k, v in total_data.items():
                     full_data[f"{k}_total"] = v
                 for k, v in annual_data.items():

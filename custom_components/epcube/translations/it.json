@@ -225,10 +225,10 @@
         "name": "Batteria Capacità"
       },
       "gridelectricityfrom": {
-        "name": "Rete Electricityfrom"
+        "name": "Rete Energia Prelevata"
       },
       "gridelectricityto": {
-        "name": "Rete Energia Prelevata"
+        "name": "Rete Energia Immessa"
       },
       "treenum": {
         "name": "Alberi Salvati"
@@ -330,13 +330,13 @@
         "name": "Solare Potenza (Mensile)"
       },
       "solarelectricity_total": {
-        "name": "Solare Energia Totale (Totale)"
+        "name": "Solare Energia (Totale)"
       },
       "solarelectricity_annual": {
-        "name": "Solare Energia Totale (Annuale)"
+        "name": "Solare Energia (Annuale)"
       },
       "solarelectricity_monthly": {
-        "name": "Solare Energia Totale (Mensile)"
+        "name": "Solare Energia (Mensile)"
       },
       "solardcelectricity_total": {
         "name": "Solare DC Energia (Totale)"
@@ -582,13 +582,13 @@
         "name": "Versione Payload (Mensile)"
       },
       "gridtotalpower_total": {
-        "name": "Rete Potenza Totale (Totale)"
+        "name": "Rete Potenza (Totale)"
       },
       "gridtotalpower_annual": {
-        "name": "Rete Potenza Totale (Annuale)"
+        "name": "Rete Potenza (Annuale)"
       },
       "gridtotalpower_monthly": {
-        "name": "Rete Potenza Totale (Mensile)"
+        "name": "Rete Potenza (Mensile)"
       },
       "gridhalfpower_total": {
         "name": "Rete Metà Potenza (Totale)"
@@ -843,22 +843,22 @@
         "name": "Batteria Capacità (Mensile)"
       },
       "gridelectricityfrom_total": {
-        "name": "Rete Electricityfrom (Totale)"
-      },
-      "gridelectricityfrom_annual": {
-        "name": "Rete Electricityfrom (Annuale)"
-      },
-      "gridelectricityfrom_monthly": {
-        "name": "Rete Electricityfrom (Mensile)"
-      },
-      "gridelectricityto_total": {
         "name": "Rete Energia Prelevata (Totale)"
       },
-      "gridelectricityto_annual": {
+      "gridelectricityfrom_annual": {
         "name": "Rete Energia Prelevata (Annuale)"
       },
-      "gridelectricityto_monthly": {
+      "gridelectricityfrom_monthly": {
         "name": "Rete Energia Prelevata (Mensile)"
+      },
+      "gridelectricityto_total": {
+        "name": "Rete Energia Immessa (Totale)"
+      },
+      "gridelectricityto_annual": {
+        "name": "Rete Energia Immessa (Annuale)"
+      },
+      "gridelectricityto_monthly": {
+        "name": "Rete Energia Immessa (Mensile)"
       },
       "treenum_total": {
         "name": "Alberi Salvati (Totale)"

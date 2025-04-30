@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "data": {
-          "token": "EPCUBE Token"
+          "token": "Token EPCUBE"
         }
       }
     }
@@ -12,11 +12,10 @@
     "step": {
       "init": {
         "data": {
-          "token": "EPCUBE Token",
+          "token": "Token EPCUBE",
           "scan_interval": "Data update frequency",
-          "scale_power": "Multiply power values (*1000)",
           "enable_total": "Enable all total sensors",
-          "enable_annual": "Enable all annual sensors",
+          "enable_annual": "Enable all yearly sensors",
           "enable_monthly": "Enable all monthly sensors"
         }
       }
@@ -25,25 +24,25 @@
   "entity": {
     "sensor": {
       "devid": {
-        "name": "EPCUBE ID"
+        "name": "ID EPCUBE"
       },
       "status": {
-        "name": "General Status"
+        "name": "General State"
       },
       "workstatus": {
         "name": "Work Status"
       },
       "batterysoc": {
-        "name": "Battery SOC"
+        "name": "Battery Soc"
       },
       "batterycurrentelectricity": {
-        "name": "Battery Current Energy"
+        "name": "Battery Energy Current"
       },
       "gridpowerfailurenum": {
-        "name": "Grid Power Failures"
+        "name": "Network Power Failure"
       },
       "offgridpowersupplytime": {
-        "name": "Offgrid Supply Time"
+        "name": "Offgrid energy supply time"
       },
       "gridpower": {
         "name": "Grid Power"
@@ -55,7 +54,7 @@
         "name": "Solar Power"
       },
       "solarelectricity": {
-        "name": "Solar Energy"
+        "name": "Solar Total Energy"
       },
       "solardcelectricity": {
         "name": "Solar DC Energy"
@@ -70,46 +69,46 @@
         "name": "Generator Energy"
       },
       "evpower": {
-        "name": "EV Power"
+        "name": "Electric Vehicle Power"
       },
       "evelectricity": {
-        "name": "EV Energy"
+        "name": "Electric Vehicle Energy"
       },
       "nonbackuppower": {
-        "name": "Non Backup Power"
+        "name": "No Power Backup"
       },
       "nonbackupelectricity": {
-        "name": "Non Backup Energy"
+        "name": "No Energy Backup"
       },
       "backuppower": {
-        "name": "Home Power"
+        "name": "Consumi Casa Potenza"
       },
       "backupelectricity": {
-        "name": "Home Energy"
+        "name": "Home Energy Consumption"
       },
       "selfhelprate": {
-        "name": "EPCUBE Contribution Rate"
+        "name": "EPCUBE Contribution Report"
       },
       "isalert": {
-        "name": "Alert Status"
+        "name": "On Alert"
       },
       "isfault": {
-        "name": "Fault Status"
+        "name": "On Fault"
       },
       "defcreatetime": {
-        "name": "Default Creation Time"
+        "name": "Defcreatetime"
       },
       "deftimezone": {
-        "name": "Device Timezone"
+        "name": "Timezone Coordinate"
       },
       "fromcreatetime": {
-        "name": "Creation Time"
+        "name": "Fromcreatetime"
       },
       "fromtimezone": {
         "name": "Local Timezone"
       },
       "fromtype": {
-        "name": "Source Type"
+        "name": "Fromtype"
       },
       "systemstatus": {
         "name": "System Status"
@@ -124,109 +123,115 @@
         "name": "Generator Light"
       },
       "evlight": {
-        "name": "EV Light"
+        "name": "Electric Vehicle Light"
       },
       "ressnumber": {
-        "name": "Battery Count"
+        "name": "Number of Batteries"
       },
       "isnewdevice": {
         "name": "Is New Device"
       },
       "version": {
-        "name": "Firmware Version"
+        "name": "Version"
       },
       "payloadversion": {
-        "name": "Payload Version"
+        "name": "Version Payload"
       },
       "gridtotalpower": {
-        "name": "Total Grid Power"
+        "name": "Total Power Network"
       },
       "gridhalfpower": {
-        "name": "Half Grid Power"
+        "name": "Half Power Network"
       },
       "solarflow": {
         "name": "Solar Flow"
       },
+      "solaracpower": {
+        "name": "Solar AC Power"
+      },
+      "solardcpower": {
+        "name": "Solar DC Power"
+      },
       "generatorflowpower": {
-        "name": "Generator Flow Power"
+        "name": "Flow Power Generator"
       },
       "evflowpower": {
-        "name": "EV Flow Power"
+        "name": "Electric Vehicle Power Flow"
       },
       "nonbackupflowpower": {
-        "name": "Non Backup Flow Power"
+        "name": "Non Backup Power Flow"
       },
       "backupflowpower": {
-        "name": "Home Flow Power"
+        "name": "Home Power Consumption Flow"
       },
       "backuploadsmode": {
-        "name": "Home Upload Mode"
+        "name": "Home Loading Mode"
       },
       "faultwarningtype": {
-        "name": "Fault Warning Type"
+        "name": "Faultwarningtype"
       },
       "off_on_grid_hint": {
-        "name": "Off/On Grid Hint"
+        "name": "Off On Grid Hint"
       },
       "weatherwatch": {
-        "name": "Weather Watch"
+        "name": "Weatherwatch"
       },
       "onlysave": {
-        "name": "Save Only"
+        "name": "Onlysave"
       },
       "backuppowerreservesoc": {
-        "name": "Home Reserve SOC"
+        "name": "Reserve House Potenza Soc"
       },
       "selfconsumptioinreservesoc": {
-        "name": "Self-Consumption Reserve SOC"
+        "name": "Self-consumption Reserve Soc"
       },
       "allowchargingxiagrid": {
-        "name": "Allow Charging from Grid"
+        "name": "Allow charging from the network"
       },
       "activeweek": {
-        "name": "Active Weeks"
+        "name": "Weeks of activity"
       },
       "activeweeknonworkday": {
-        "name": "Inactive Weeks"
+        "name": "Weeks of non-activity"
       },
       "daylightsavingtime": {
-        "name": "Daylight Saving Time"
+        "name": "Daylightsavingtime"
       },
       "daylightactiveweek": {
-        "name": "Daylight Active Week"
+        "name": "Daylightactiveweek"
       },
       "daylightactiveweeknonworkday": {
-        "name": "Daylight Inactive Week"
+        "name": "Daylightactiveweeknonworkday"
       },
       "evchargerreservesoc": {
-        "name": "EV Charger Reserve SOC"
+        "name": "Electric Vehicle Battery Backup Soc"
       },
       "daytype": {
-        "name": "Day Type"
+        "name": "Daytype"
       },
       "isdaylightsaving": {
-        "name": "Is Daylight Saving"
+        "name": "Isdaylightsaving"
       },
       "activationdata": {
         "name": "Activation Date"
       },
       "warrantydata": {
-        "name": "Warranty Expiry"
+        "name": "Warranty Expiration"
       },
       "modeltype": {
-        "name": "EPCUBE Model"
+        "name": "Model EPCUBE"
       },
       "batterycapacity": {
         "name": "Battery Capacity"
       },
       "gridelectricityfrom": {
-        "name": "Grid Import Energy"
+        "name": "Grid Energy From"
       },
       "gridelectricityto": {
-        "name": "Grid Export Energy"
+        "name": "Grid Energy To"
       },
       "treenum": {
-        "name": "Trees Saved"
+        "name": "Saved Trees"
       },
       "coal": {
         "name": "Coal Saved"
@@ -234,11 +239,653 @@
       "hasvalue": {
         "name": "Has Value"
       },
-      "solaracpower": {
-        "name": "Solar AC Power"
+      "devid_total": {
+        "name": "ID EPCUBE (Total)"
       },
-      "solardcpower": {
-        "name": "Solar DC Power"
+      "devid_annual": {
+        "name": "ID EPCUBE (Annual)"
+      },
+      "devid_monthly": {
+        "name": "ID EPCUBE (Monthly)"
+      },
+      "status_total": {
+        "name": "General State (Total)"
+      },
+      "status_annual": {
+        "name": "General State (Annual)"
+      },
+      "status_monthly": {
+        "name": "General State (Monthly)"
+      },
+      "workstatus_total": {
+        "name": "Employment Status (Total)"
+      },
+      "workstatus_annual": {
+        "name": "Employment Status (Annual)"
+      },
+      "workstatus_monthly": {
+        "name": "Employment Status (Monthly)"
+      },
+      "batterysoc_total": {
+        "name": "Battery Soc (Total)"
+      },
+      "batterysoc_annual": {
+        "name": "Battery Soc (Annual)"
+      },
+      "batterysoc_monthly": {
+        "name": "Battery Soc (Monthly)"
+      },
+      "batterycurrentelectricity_total": {
+        "name": "Battery Energy Current (Total)"
+      },
+      "batterycurrentelectricity_annual": {
+        "name": "Battery Energy Current (Annual)"
+      },
+      "batterycurrentelectricity_monthly": {
+        "name": "Battery Energy Current (Monthly)"
+      },
+      "gridpowerfailurenum_total": {
+        "name": "Network Power Failure (Total)"
+      },
+      "gridpowerfailurenum_annual": {
+        "name": "Network Power Failure (Annual)"
+      },
+      "gridpowerfailurenum_monthly": {
+        "name": "Network Power Failure (Monthly)"
+      },
+      "offgridpowersupplytime_total": {
+        "name": "Offgrid energy supply time (Total)"
+      },
+      "offgridpowersupplytime_annual": {
+        "name": "Offgrid energy supply time (Annual)"
+      },
+      "offgridpowersupplytime_monthly": {
+        "name": "Offgrid energy supply time (Monthly)"
+      },
+      "gridpower_total": {
+        "name": "Grid Power (Total)"
+      },
+      "gridpower_annual": {
+        "name": "Grid Power (Annual)"
+      },
+      "gridpower_monthly": {
+        "name": "Grid Power (Monthly)"
+      },
+      "gridelectricity_total": {
+        "name": "Grid Energy (Total)"
+      },
+      "gridelectricity_annual": {
+        "name": "Grid Energy (Annual)"
+      },
+      "gridelectricity_monthly": {
+        "name": "Grid Energy (Monthly)"
+      },
+      "solarpower_total": {
+        "name": "Solar Power (Total)"
+      },
+      "solarpower_annual": {
+        "name": "Solar Power (Annual)"
+      },
+      "solarpower_monthly": {
+        "name": "Solar Power (Monthly)"
+      },
+      "solarelectricity_total": {
+        "name": "Solar Energy (Total)"
+      },
+      "solarelectricity_annual": {
+        "name": "Solar Energy (Annual)"
+      },
+      "solarelectricity_monthly": {
+        "name": "Solar Energy (Monthly)"
+      },
+      "solardcelectricity_total": {
+        "name": "Solar DC Energy (Total)"
+      },
+      "solardcelectricity_annual": {
+        "name": "Solar DC Energy (Annual)"
+      },
+      "solardcelectricity_monthly": {
+        "name": "Solar DC Energy (Monthly)"
+      },
+      "solaracelectricity_total": {
+        "name": "Solar AC Energy (Total)"
+      },
+      "solaracelectricity_annual": {
+        "name": "Solar AC Energy (Annual)"
+      },
+      "solaracelectricity_monthly": {
+        "name": "Solar AC Energy (Monthly)"
+      },
+      "generatorpower_total": {
+        "name": "Power Generator (Total)"
+      },
+      "generatorpower_annual": {
+        "name": "Power Generator (Annual)"
+      },
+      "generatorpower_monthly": {
+        "name": "Power Generator (Monthly)"
+      },
+      "generatorelectricity_total": {
+        "name": "Generator Energy (Total)"
+      },
+      "generatorelectricity_annual": {
+        "name": "Generator Energy (Annual)"
+      },
+      "generatorelectricity_monthly": {
+        "name": "Generator Energy (Monthly)"
+      },
+      "evpower_total": {
+        "name": "Electric Vehicle Power (Total)"
+      },
+      "evpower_annual": {
+        "name": "Electric Vehicle Power (Annual)"
+      },
+      "evpower_monthly": {
+        "name": "Electric Vehicle Power (Monthly)"
+      },
+      "evelectricity_total": {
+        "name": "Electric Vehicle Energy (Total)"
+      },
+      "evelectricity_annual": {
+        "name": "Electric Vehicle Energy (Annual)"
+      },
+      "evelectricity_monthly": {
+        "name": "Electric Vehicle Energy (Monthly)"
+      },
+      "nonbackuppower_total": {
+        "name": "No Power Backup (Total)"
+      },
+      "nonbackuppower_annual": {
+        "name": "No Power Backup (Annual)"
+      },
+      "nonbackuppower_monthly": {
+        "name": "No Power Backup (Monthly)"
+      },
+      "nonbackupelectricity_total": {
+        "name": "No Energy Backup (Total)"
+      },
+      "nonbackupelectricity_annual": {
+        "name": "No Energy Backup (Annual)"
+      },
+      "nonbackupelectricity_monthly": {
+        "name": "No Energy Backup (Monthly)"
+      },
+      "backuppower_total": {
+        "name": "Home Power (Total)"
+      },
+      "backuppower_annual": {
+        "name": "Home Power (Annual)"
+      },
+      "backuppower_monthly": {
+        "name": "Home Power (Monthly)"
+      },
+      "backupelectricity_total": {
+        "name": "Home Energy (Total)"
+      },
+      "backupelectricity_annual": {
+        "name": "Home Energy (Annual)"
+      },
+      "backupelectricity_monthly": {
+        "name": "Home Energy (Monthly)"
+      },
+      "selfhelprate_total": {
+        "name": "EPCUBE Contribution Report (Total)"
+      },
+      "selfhelprate_annual": {
+        "name": "EPCUBE Contribution Report (Annual)"
+      },
+      "selfhelprate_monthly": {
+        "name": "EPCUBE Contribution Report (Monthly)"
+      },
+      "isalert_total": {
+        "name": "On Alert (Total)"
+      },
+      "isalert_annual": {
+        "name": "On Alert (Annual)"
+      },
+      "isalert_monthly": {
+        "name": "On Alert (Monthly)"
+      },
+      "isfault_total": {
+        "name": "Is Fault (Total)"
+      },
+      "isfault_annual": {
+        "name": "Is Fault (Annual)"
+      },
+      "isfault_monthly": {
+        "name": "Is Fault (Monthly)"
+      },
+      "defcreatetime_total": {
+        "name": "Defcreatetime (Total)"
+      },
+      "defcreatetime_annual": {
+        "name": "Defcreatetime (Annual)"
+      },
+      "defcreatetime_monthly": {
+        "name": "Defcreatetime (Monthly)"
+      },
+      "deftimezone_total": {
+        "name": "Timezone Coordinate (Total)"
+      },
+      "deftimezone_annual": {
+        "name": "Timezone Coordinate (Annual)"
+      },
+      "deftimezone_monthly": {
+        "name": "Timezone Coordinate (Monthly)"
+      },
+      "fromcreatetime_total": {
+        "name": "Fromcreatetime (Total)"
+      },
+      "fromcreatetime_annual": {
+        "name": "Fromcreatetime (Annual)"
+      },
+      "fromcreatetime_monthly": {
+        "name": "Fromcreatetime (Monthly)"
+      },
+      "fromtimezone_total": {
+        "name": "Timezone Local (Total)"
+      },
+      "fromtimezone_annual": {
+        "name": "Timezone Local (Annual)"
+      },
+      "fromtimezone_monthly": {
+        "name": "Timezone Local (Monthly)"
+      },
+      "fromtype_total": {
+        "name": "Fromtype (Total)"
+      },
+      "fromtype_annual": {
+        "name": "Fromtype (Annual)"
+      },
+      "fromtype_monthly": {
+        "name": "Fromtype (Monthly)"
+      },
+      "systemstatus_total": {
+        "name": "System Status (Total)"
+      },
+      "systemstatus_annual": {
+        "name": "System Status (Annual)"
+      },
+      "systemstatus_monthly": {
+        "name": "System Status (Monthly)"
+      },
+      "backuptype_total": {
+        "name": "Home Backup Type (Total)"
+      },
+      "backuptype_annual": {
+        "name": "Home Backup Type (Annual)"
+      },
+      "backuptype_monthly": {
+        "name": "Home Backup Type (Monthly)"
+      },
+      "gridlight_total": {
+        "name": "Grid Light (Total)"
+      },
+      "gridlight_annual": {
+        "name": "Grid Light (Annual)"
+      },
+      "gridlight_monthly": {
+        "name": "Grid Light (Monthly)"
+      },
+      "generatorlight_total": {
+        "name": "Generator Light (Total)"
+      },
+      "generatorlight_annual": {
+        "name": "Generator Light (Annual)"
+      },
+      "generatorlight_monthly": {
+        "name": "Generator Light (Monthly)"
+      },
+      "evlight_total": {
+        "name": "Electric Vehicle Light (Total)"
+      },
+      "evlight_annual": {
+        "name": "Electric Vehicle Light (Annual)"
+      },
+      "evlight_monthly": {
+        "name": "Electric Vehicle Light (Monthly)"
+      },
+      "ressnumber_total": {
+        "name": "Number of Batteries (Total)"
+      },
+      "ressnumber_annual": {
+        "name": "Number of Batteries (Annual)"
+      },
+      "ressnumber_monthly": {
+        "name": "Number of Batteries (Monthly)"
+      },
+      "isnewdevice_total": {
+        "name": "New Device (Total)"
+      },
+      "isnewdevice_annual": {
+        "name": "New Device (Annual)"
+      },
+      "isnewdevice_monthly": {
+        "name": "New Device (Monthly)"
+      },
+      "version_total": {
+        "name": "Version (Total)"
+      },
+      "version_annual": {
+        "name": "Version (Annual)"
+      },
+      "version_monthly": {
+        "name": "Version (Monthly)"
+      },
+      "payloadversion_total": {
+        "name": "Version Payload (Total)"
+      },
+      "payloadversion_annual": {
+        "name": "Version Payload (Annual)"
+      },
+      "payloadversion_monthly": {
+        "name": "Version Payload (Monthly)"
+      },
+      "gridtotalpower_total": {
+        "name": "Grid Power (Total)"
+      },
+      "gridtotalpower_annual": {
+        "name": "Grid Power (Annual)"
+      },
+      "gridtotalpower_monthly": {
+        "name": "Grid Power (Monthly)"
+      },
+      "gridhalfpower_total": {
+        "name": "Half Power Network (Total)"
+      },
+      "gridhalfpower_annual": {
+        "name": "Half Power Network(Annual)"
+      },
+      "gridhalfpower_monthly": {
+        "name": "Half Power Network (Monthly)"
+      },
+      "solarflow_total": {
+        "name": "Solar Flow (Total)"
+      },
+      "solarflow_annual": {
+        "name": "Solar Flow (Annual)"
+      },
+      "solarflow_monthly": {
+        "name": "Solar Flow (Monthly)"
+      },
+      "solaracpower_total": {
+        "name": "Solar AC Power (Total)"
+      },
+      "solaracpower_annual": {
+        "name": "Solar AC Power (Annual)"
+      },
+      "solaracpower_monthly": {
+        "name": "Solar AC Power (Monthly)"
+      },
+      "solardcpower_total": {
+        "name": "Solar DC Power (Total)"
+      },
+      "solardcpower_annual": {
+        "name": "Solar DC Power (Annual)"
+      },
+      "solardcpower_monthly": {
+        "name": "Solar DC Power (Monthly)"
+      },
+      "generatorflowpower_total": {
+        "name": "Flow Power Generator (Total)"
+      },
+      "generatorflowpower_annual": {
+        "name": "Flow Power Generator (Annual)"
+      },
+      "generatorflowpower_monthly": {
+        "name": "Flow Power Generator (Monthly)"
+      },
+      "evflowpower_total": {
+        "name": "Electric Vehicle Power Flow (Total)"
+      },
+      "evflowpower_annual": {
+        "name": "Electric Vehicle Power Flow(Annual)"
+      },
+      "evflowpower_monthly": {
+        "name": "Electric Vehicle Power Flow (Monthly)"
+      },
+      "nonbackupflowpower_total": {
+        "name": "Non Backup Power Flow (Total)"
+      },
+      "nonbackupflowpower_annual": {
+        "name": "Non Backup Power Flow(Annual)"
+      },
+      "nonbackupflowpower_monthly": {
+        "name": "Non Backup Power Flow (Monthly)"
+      },
+      "backupflowpower_total": {
+        "name": "Home Power Flow (Total)"
+      },
+      "backupflowpower_annual": {
+        "name": "Home Power Flow (Annual)"
+      },
+      "backupflowpower_monthly": {
+        "name": "Home Power Flow (Monthly)"
+      },
+      "backuploadsmode_total": {
+        "name": "Home Loading Mode (Total)"
+      },
+      "backuploadsmode_annual": {
+        "name": "Home Loading Mode (Annual)"
+      },
+      "backuploadsmode_monthly": {
+        "name": "Home Loading Mode (Monthly)"
+      },
+      "faultwarningtype_total": {
+        "name": "Faultwarningtype (Total)"
+      },
+      "faultwarningtype_annual": {
+        "name": "Faultwarningtype (Annual)"
+      },
+      "faultwarningtype_monthly": {
+        "name": "Faultwarningtype (Monthly)"
+      },
+      "off_on_grid_hint_total": {
+        "name": "Off On Grid Hint (Total)"
+      },
+      "off_on_grid_hint_annual": {
+        "name": "Off On Grid Hint (Annual)"
+      },
+      "off_on_grid_hint_monthly": {
+        "name": "Off On Grid Hint (Monthly)"
+      },
+      "weatherwatch_total": {
+        "name": "Weatherwatch (Total)"
+      },
+      "weatherwatch_annual": {
+        "name": "Weatherwatch (Annual)"
+      },
+      "weatherwatch_monthly": {
+        "name": "Weatherwatch (Monthly)"
+      },
+      "onlysave_total": {
+        "name": "Onlysave (Total)"
+      },
+      "onlysave_annual": {
+        "name": "Onlysave (Annual)"
+      },
+      "onlysave_monthly": {
+        "name": "Onlysave (Monthly)"
+      },
+      "backuppowerreservesoc_total": {
+        "name": "Reserve House Potenza Soc (Total)"
+      },
+      "backuppowerreservesoc_annual": {
+        "name": "Reserve House Potenza Soc (Annual)"
+      },
+      "backuppowerreservesoc_monthly": {
+        "name": "Reserve House Potenza Soc (Monthly)"
+      },
+      "selfconsumptioinreservesoc_total": {
+        "name": "Self-consumption Reserve Soc (Total)"
+      },
+      "selfconsumptioinreservesoc_annual": {
+        "name": "Self-consumption Reserve Soc (Annual)"
+      },
+      "selfconsumptioinreservesoc_monthly": {
+        "name": "Self-consumption Reserve Soc (Monthly)"
+      },
+      "allowchargingxiagrid_total": {
+        "name": "Allow charging from the network (Total)"
+      },
+      "allowchargingxiagrid_annual": {
+        "name": "Allow charging from the network (Annual)"
+      },
+      "allowchargingxiagrid_monthly": {
+        "name": "Allow charging from the network (Monthly)"
+      },
+      "activeweek_total": {
+        "name": "Weeks of activity (Total)"
+      },
+      "activeweek_annual": {
+        "name": "Weeks of activity (Annual)"
+      },
+      "activeweek_monthly": {
+        "name": "Weeks of activity (Monthly)"
+      },
+      "activeweeknonworkday_total": {
+        "name": "Weeks of non-activity (Total)"
+      },
+      "activeweeknonworkday_annual": {
+        "name": "Weeks of non-activity (Annual)"
+      },
+      "activeweeknonworkday_monthly": {
+        "name": "Weeks of non-activity (Monthly)"
+      },
+      "daylightsavingtime_total": {
+        "name": "Daylightsavingtime (Total)"
+      },
+      "daylightsavingtime_annual": {
+        "name": "Daylightsavingtime (Annual)"
+      },
+      "daylightsavingtime_monthly": {
+        "name": "Daylightsavingtime (Monthly)"
+      },
+      "daylightactiveweek_total": {
+        "name": "Daylightactiveweek (Total)"
+      },
+      "daylightactiveweek_annual": {
+        "name": "Daylightactiveweek (Annual)"
+      },
+      "daylightactiveweek_monthly": {
+        "name": "Daylightactiveweek (Monthly)"
+      },
+      "daylightactiveweeknonworkday_total": {
+        "name": "Daylightactiveweeknonworkday (Total)"
+      },
+      "daylightactiveweeknonworkday_annual": {
+        "name": "Daylightactiveweeknonworkday (Annual)"
+      },
+      "daylightactiveweeknonworkday_monthly": {
+        "name": "Daylightactiveweeknonworkday (Monthly)"
+      },
+      "evchargerreservesoc_total": {
+        "name": "Electric Vehicle Battery Backup Soc (Total)"
+      },
+      "evchargerreservesoc_annual": {
+        "name": "Electric Vehicle Battery Backup Soc (Annual)"
+      },
+      "evchargerreservesoc_monthly": {
+        "name": "Electric Vehicle Battery Backup Soc (Monthly)"
+      },
+      "daytype_total": {
+        "name": "Daytype (Total)"
+      },
+      "daytype_annual": {
+        "name": "Daytype (Annual)"
+      },
+      "daytype_monthly": {
+        "name": "Daytype (Monthly)"
+      },
+      "isdaylightsaving_total": {
+        "name": "Isdaylightsaving (Total)"
+      },
+      "isdaylightsaving_annual": {
+        "name": "Isdaylightsaving (Annual)"
+      },
+      "isdaylightsaving_monthly": {
+        "name": "Isdaylightsaving (Monthly)"
+      },
+      "activationdata_total": {
+        "name": "Activation Date (Total)"
+      },
+      "activationdata_annual": {
+        "name": "Activation Date (Annual)"
+      },
+      "activationdata_monthly": {
+        "name": "Activation Date (Monthly)"
+      },
+      "warrantydata_total": {
+        "name": "Warranty Expiration (Total)"
+      },
+      "warrantydata_annual": {
+        "name": "Warranty Expiration (Annual)"
+      },
+      "warrantydata_monthly": {
+        "name": "Warranty Expiration (Monthly)"
+      },
+      "modeltype_total": {
+        "name": "Model EPCUBE (Total)"
+      },
+      "modeltype_annual": {
+        "name": "Model EPCUBE (Annual)"
+      },
+      "modeltype_monthly": {
+        "name": "Model EPCUBE (Monthly)"
+      },
+      "batterycapacity_total": {
+        "name": "Battery Capacity (Total)"
+      },
+      "batterycapacity_annual": {
+        "name": "Battery Capacity (Annual)"
+      },
+      "batterycapacity_monthly": {
+        "name": "Battery Capacity (Monthly)"
+      },
+      "gridelectricityfrom_total": {
+        "name": "Grid Energy Network (Total)"
+      },
+      "gridelectricityfrom_annual": {
+        "name": "Grid Energy Network (Annual)"
+      },
+      "gridelectricityfrom_monthly": {
+        "name": "Grid Energy Network (Monthly)"
+      },
+      "gridelectricityto_total": {
+        "name": "Rete Energia Immessa (Total)"
+      },
+      "gridelectricityto_annual": {
+        "name": "Rete Energia Immessa (Annual)"
+      },
+      "gridelectricityto_monthly": {
+        "name": "Rete Energia Immessa (Monthly)"
+      },
+      "treenum_total": {
+        "name": "Saved Trees (Total)"
+      },
+      "treenum_annual": {
+        "name": "Saved Trees (Annual)"
+      },
+      "treenum_monthly": {
+        "name": "Saved Trees (Monthly)"
+      },
+      "coal_total": {
+        "name": "Coal Saved (Total)"
+      },
+      "coal_annual": {
+        "name": "Coal Saved (Annual)"
+      },
+      "coal_monthly": {
+        "name": "Coal Saved (Monthly)"
+      },
+      "hasvalue_total": {
+        "name": "Has Value (Total)"
+      },
+      "hasvalue_annual": {
+        "name": "Has Value (Annual)"
+      },
+      "hasvalue_monthly": {
+        "name": "Has Value (Monthly)"
       }
     }
   }
