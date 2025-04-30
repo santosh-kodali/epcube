@@ -2,6 +2,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from .const import DOMAIN, PLATFORMS, DEFAULT_SCAN_INTERVAL
 from .sensor import async_update_data_with_stats
+from .state import EpCubeDataState
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from datetime import timedelta
@@ -27,8 +28,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         "authorization": token
     }
 
+    state = EpCubeDataState()
+
     async def async_update_data():
-        return await async_update_data_with_stats(session, url, headers, sn, token)
+        return await async_update_data_with_stats(session, url, headers, sn, token, hass=hass, entry_id=entry.entry_id)
 
     coordinator = DataUpdateCoordinator(
         hass,
@@ -38,12 +41,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         update_interval=timedelta(seconds=scan_interval),
     )
 
-    await coordinator.async_refresh()
-
     hass.data[DOMAIN][entry.entry_id] = {
-        "coordinator": coordinator
+        "coordinator": coordinator,
+        "state": state
     }
-
+    
+    await coordinator.async_refresh()
+    
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 

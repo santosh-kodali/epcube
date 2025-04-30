@@ -6,8 +6,9 @@ from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass,
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.util import dt as dt_util
 from homeassistant.helpers.entity_registry import async_get, RegistryEntryDisabler
+from homeassistant.helpers.restore_state import RestoreEntity
 
-
+from .state import EpCubeDataState
 from .const import DOMAIN, DEFAULT_SCAN_INTERVAL, CONF_ENABLE_TOTAL, CONF_ENABLE_ANNUAL, CONF_ENABLE_MONTHLY
 import aiohttp
 import async_timeout
@@ -93,15 +94,13 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         #power = kW (none)
         #power (i numeri arrivano in watt) = W
         
-        if "electricity" in base_key or "flow" in base_key:  # kWh
-            #_LOGGER.debug("Energy kWh: %s", base_key)
+        if "electricity" in base_key:
             device_class = SensorDeviceClass.ENERGY
             unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
             state_class = SensorStateClass.TOTAL_INCREASING
-        elif "power" in base_key:  # W
-            #_LOGGER.debug("Power W: %s", base_key)
+        elif "flow" in base_key or "power" in base_key:
             device_class = SensorDeviceClass.POWER
-            unit_of_measurement = UnitOfPower.WATT #KILO_WATT
+            unit_of_measurement = UnitOfPower.WATT
             state_class = SensorStateClass.MEASUREMENT
 
         elif "soc" in base_key:
@@ -112,6 +111,7 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
                 device_class = SensorDeviceClass.BATTERY
                 entity_category = None
             else:
+                device_class = None
                 entity_category = EntityCategory.DIAGNOSTIC
 
         else:
@@ -179,19 +179,16 @@ async def fetch_epcube_stats(session, token, dev_id, date_str, scope_type):
 
     async with session.get(url, headers=headers) as resp:
         json_data = await resp.json()
-        #_LOGGER.debug("Risposta JSON (%s - %s): %s", scope_type, date_str, json_data)
         raw_data = json_data.get("data", {})
         normalized = {k.lower(): v for k, v in raw_data.items()}
-        #_LOGGER.debug("Nomalized: %s" %normalized)
         return normalized
 
-async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
+async def async_update_data_with_stats(session, url, headers, dev_id_sn, token, hass, entry_id):
     try:
         with async_timeout.timeout(15):
             async with session.get(url, headers=headers) as resp:
                 if resp.content_type != "application/json":
                     raise UpdateFailed(f"Tipo MIME non gestito: {resp.content_type}")
-
 
                 live_data = await resp.json()
                 full_data_raw = live_data.get("data", {})
@@ -203,12 +200,11 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
                 month_str = now.strftime("%Y-%m")
                 today_str = now.strftime("%Y-%m-%d")
 
-
                 live_data = await fetch_epcube_stats(session, token, real_dev_id, today_str, 1)
                 total_data = await fetch_epcube_stats(session, token, real_dev_id, year_str, 0)
                 annual_data = await fetch_epcube_stats(session, token, real_dev_id, year_str, 3)
                 monthly_data = await fetch_epcube_stats(session, token, real_dev_id, month_str, 2)
-                
+
                 device_info = await fetch_device_info(session, token, real_dev_id)
 
                 switch_url = f"https://monitoring-eu.epcube.com/api/device/getSwitchMode?devId={real_dev_id}"
@@ -238,6 +234,14 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token):
                 for k, v in monthly_data.items():
                     full_data[f"{k}_monthly"] = v
 
+                battery_now = full_data.get("batterycurrentelectricity")
+                if battery_now is not None:
+                    try:
+                        state: EpCubeDataState = hass.data[DOMAIN][entry_id]["state"]
+                        state.update(float(battery_now))
+                    except Exception as e:
+                        _LOGGER.warning("Errore nel calcolo del SOC cumulativo: %s", e)
+
                 return {"data": full_data}
 
     except Exception as err:
@@ -262,38 +266,36 @@ async def async_setup_entry(hass, entry, async_add_entities):
         enable_monthly=enable_monthly
     )
 
-    entities = []
+    entities = [
+        EpCubeSensor(coordinator, sensor) for sensor in sensors
+    ] + [
+        EpCubeLastUpdateSensor(coordinator),
+        EpCubeBatteryChargeSensor(coordinator),
+        EpCubeBatteryDischargeSensor(coordinator),
+    ]
 
-    for sensor in sensors:
-        entity = EpCubeSensor(coordinator, sensor)
-
-        entities.append(entity)
-
-    entities.append(EpCubeLastUpdateSensor(coordinator))
-
-    async_add_entities(entities, True)
-
-    entity_registry = async_get(hass)
+    registry = async_get(hass)
 
     for entity in entities:
-        if entity.entity_id is not None:
-            if "_annual" in entity.entity_id:
-                if enable_annual:
-                    entity_registry.async_update_entity(entity.entity_id, disabled_by=None)
-                else:
-                    entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
-            elif "_monthly" in entity.entity_id:
-                if enable_monthly:
-                    entity_registry.async_update_entity(entity.entity_id, disabled_by=None)
-                else:
-                    entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
-            elif "_total" in entity.entity_id:
-                if enable_total:
-                    entity_registry.async_update_entity(entity.entity_id, disabled_by=None)
-                else:
-                    entity_registry.async_update_entity(entity.entity_id, disabled_by=RegistryEntryDisabler.DEVICE)
-            
-    return True
+        if registry.async_get_entity_id("sensor", DOMAIN, entity.unique_id) is None:
+            disabled_by = None
+            if entity.unique_id.endswith("_total") and not enable_total:
+                disabled_by = RegistryEntryDisabler.INTEGRATION
+            elif entity.unique_id.endswith("_annual") and not enable_annual:
+                disabled_by = RegistryEntryDisabler.INTEGRATION
+            elif entity.unique_id.endswith("_monthly") and not enable_monthly:
+                disabled_by = RegistryEntryDisabler.INTEGRATION
+
+            registry.async_get_or_create(
+                domain="sensor",
+                platform=DOMAIN,
+                unique_id=entity.unique_id,
+                suggested_object_id=entity.unique_id,
+                disabled_by=disabled_by
+            )
+
+    async_add_entities(entities, True)
+    
 
 class EpCubeSensor(CoordinatorEntity, SensorEntity):
     def __init__(self, coordinator, description):
@@ -316,7 +318,6 @@ class EpCubeSensor(CoordinatorEntity, SensorEntity):
             "configuration_url": "https://monitoring-eu.epcube.com/"
         }
 
-
     @property
     def native_value(self):
         value = self.coordinator.data["data"].get(self.entity_description.key)
@@ -336,7 +337,68 @@ class EpCubeLastUpdateSensor(CoordinatorEntity, SensorEntity):
         self._attr_unique_id = "epcube_last_update"
         self._attr_device_class = SensorDeviceClass.TIMESTAMP
         self._attr_entity_category = EntityCategory.DIAGNOSTIC
+        self._attr_entity_registry_enabled_default = True
 
     @property
     def native_value(self):
         return dt_util.utcnow()
+
+class EpCubeBatteryChargeSensor(CoordinatorEntity, RestoreEntity, SensorEntity):
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self._attr_unique_id = "epcube_battery_energy_in"
+        self._attr_name = "Battery Energy In"
+        self._attr_device_class = SensorDeviceClass.ENERGY
+        self._attr_state_class = SensorStateClass.TOTAL_INCREASING
+        self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
+        self._attr_device_info = {
+            "identifiers": {("epcube", "epcube_device")},
+            "name": "EPCUBE",
+            "manufacturer": "CanadianSolar",
+            "model": "EPCUBE",
+        }
+
+    async def async_added_to_hass(self):
+        await super().async_added_to_hass()
+        last_state = await self.async_get_last_state()
+        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
+        if last_state is not None and getattr(state_obj, "charge_total", 0) == 0:
+            try:
+                state_obj.charge_total = float(last_state.state)
+            except ValueError:
+                pass
+
+    @property
+    def native_value(self):
+        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
+        return round(state_obj.charge_total, 3)
+
+class EpCubeBatteryDischargeSensor(CoordinatorEntity, RestoreEntity, SensorEntity):
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self._attr_unique_id = "epcube_battery_energy_out"
+        self._attr_name = "Battery Energy Out"
+        self._attr_device_class = SensorDeviceClass.ENERGY
+        self._attr_state_class = SensorStateClass.TOTAL_INCREASING
+        self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
+        self._attr_device_info = {
+            "identifiers": {("epcube", "epcube_device")},
+            "name": "EPCUBE",
+            "manufacturer": "CanadianSolar",
+            "model": "EPCUBE",
+        }
+
+    async def async_added_to_hass(self):
+        await super().async_added_to_hass()
+        last_state = await self.async_get_last_state()
+        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
+        if last_state is not None and getattr(state_obj, "discharge_total", 0) == 0:
+            try:
+                state_obj.discharge_total = float(last_state.state)
+            except ValueError:
+                pass
+
+    @property
+    def native_value(self):
+        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
+        return round(state_obj.discharge_total, 3)

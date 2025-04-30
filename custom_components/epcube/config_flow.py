@@ -26,6 +26,11 @@ class EpCubeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             if not sn:
                 self._errors["base"] = "sn_not_found"
             else:
+                for entry in self._async_current_entries():
+                    if entry.data.get("sn") == sn:
+                        return self.async_abort(reason="already_configured")
+
+                await self.async_set_unique_id(sn)
                 return self.async_create_entry(
                     title=f"EpCube {sn}",
                     data={
@@ -68,7 +73,6 @@ class EpCubeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     @callback
     def async_get_options_flow(config_entry):
         return EpCubeOptionsFlow(config_entry)
-
 
 class EpCubeOptionsFlow(config_entries.OptionsFlow):
     def __init__(self, config_entry):
