@@ -29,7 +29,7 @@ class EpCubeDynamicSocNumber(CoordinatorEntity, NumberEntity):
         self.coordinator = coordinator
         self.entity_description = NumberEntityDescription(
             key="epcube_dynamic_soc",
-            name="EP CUBE SOC Dinamico",
+            name="EPCUBE SOC Dinamico",
             icon="mdi:battery-charging",
             entity_category=EntityCategory.CONFIG,
         )
@@ -38,9 +38,9 @@ class EpCubeDynamicSocNumber(CoordinatorEntity, NumberEntity):
         self._attr_native_unit_of_measurement = "%"
         self._attr_device_info = {
             "identifiers": {("epcube", "epcube_device")},
-            "name": "EP CUBE",
+            "name": "EPCUBE",
             "manufacturer": "CanadianSolar",
-            "model": "EP CUBE",
+            "model": "EPCUBE",
             "entry_type": "service",
             "configuration_url": "https://monitoring-eu.epcube.com/"
         }
@@ -120,7 +120,7 @@ class EpCubeStaticSocNumber(CoordinatorEntity, NumberEntity):
         self.original_key = SOC_KEYS.get(key.lower(), key)
         self.entity_description = NumberEntityDescription(
             key=self.original_key,
-            name=f"EP CUBE {name}",
+            name=f"EPCUBE {name}",
             icon="mdi:battery-charging",
             entity_category=EntityCategory.CONFIG,
         )
@@ -132,9 +132,9 @@ class EpCubeStaticSocNumber(CoordinatorEntity, NumberEntity):
         self._attr_mode = "slider"
         self._attr_device_info = {
             "identifiers": {("epcube", "epcube_device")},
-            "name": "EP CUBE",
+            "name": "EPCUBE",
             "manufacturer": "CanadianSolar",
-            "model": "EP CUBE",
+            "model": "EPCUBE",
             "entry_type": "service",
             "configuration_url": "https://monitoring-eu.epcube.com/"
         }
