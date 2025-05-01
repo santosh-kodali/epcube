@@ -52,6 +52,7 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         "activeweek", "activeweeknonworkday", "activeweeknonworkday",
         "daylightactiveWeek", "dayLightActiveweeknonWorkday", "daytype",
         "isDayLightSaving", "weatherWatch",
+        "treenum", "coal",
     ]
 
     disabled_by_default = [
@@ -61,7 +62,10 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         #disabilito i sensori 'tempo di utilizzo'
         "activeweek", "activeweeknonworkday", "activeWeekNonWorkDay",
         "daylightactiveweek", "dayLightActiveWeekNonWorkDay", "dayType",
-        "isDayLightSaving", "weatherWatch",
+        "isDayLightSaving", "weatherWatch", "treenum", "coal",
+        "defcreatetime", "fromcreatetime",
+        #Sensori ancora senza utilità o con valori uguali ad altri
+        "gridhalfpower", "solarflow", "backupflowpower",
     ]
 
     diagnostic_sensors = [s.lower() for s in diagnostic_sensors]
