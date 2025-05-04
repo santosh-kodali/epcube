@@ -1,12 +1,22 @@
-from datetime import datetime
+from datetime import date
 
 class EpCubeDataState:
     def __init__(self):
         self.charge_total = 0.0
         self.discharge_total = 0.0
         self.last_battery_energy = None
+        self.last_reset = date.today()
 
     def update(self, battery_now: float):
+        today = date.today()
+
+        if today != self.last_reset:
+            self.charge_total = 0.0
+            self.discharge_total = 0.0
+            self.last_reset = today
+            self.last_battery_energy = battery_now
+            return
+
         if self.last_battery_energy is None:
             self.last_battery_energy = battery_now
             return

@@ -1,10 +1,9 @@
-from homeassistant.helpers.entity import Entity
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed, CoordinatorEntity
 from homeassistant.const import UnitOfEnergy, UnitOfPower, PERCENTAGE
 from homeassistant.exceptions import ConfigEntryNotReady
-from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass, SensorEntityDescription, SensorEntity
-from homeassistant.helpers.entity import EntityCategory
 from homeassistant.util import dt as dt_util
+from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass, SensorEntityDescription, SensorEntity
+from homeassistant.helpers.entity import EntityCategory, Entity
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed, CoordinatorEntity
 from homeassistant.helpers.entity_registry import async_get, RegistryEntryDisabler
 from homeassistant.helpers.restore_state import RestoreEntity
 
@@ -12,7 +11,7 @@ from .state import EpCubeDataState
 from .const import DOMAIN, DEFAULT_SCAN_INTERVAL, CONF_ENABLE_TOTAL, CONF_ENABLE_ANNUAL, CONF_ENABLE_MONTHLY
 import aiohttp
 import async_timeout
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, date
 
 import logging
 _LOGGER = logging.getLogger(__name__)
@@ -352,8 +351,8 @@ class EpCubeBatteryChargeSensor(CoordinatorEntity, RestoreEntity, SensorEntity):
         super().__init__(coordinator)
         self._attr_unique_id = "epcube_battery_energy_in"
         self._attr_name = "Battery Energy In"
-        self._attr_device_class = SensorDeviceClass.ENERGY
-        self._attr_state_class = SensorStateClass.TOTAL_INCREASING
+        self._attr_device_class = None
+        self._attr_state_class = SensorStateClass.MEASUREMENT
         self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
         self._attr_device_info = {
             "identifiers": {("epcube", "epcube_device")},
@@ -364,26 +363,31 @@ class EpCubeBatteryChargeSensor(CoordinatorEntity, RestoreEntity, SensorEntity):
 
     async def async_added_to_hass(self):
         await super().async_added_to_hass()
-        last_state = await self.async_get_last_state()
         state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
-        if last_state is not None and getattr(state_obj, "charge_total", 0) == 0:
+        last_state = await self.async_get_last_state()
+
+        if state_obj.last_reset != date.today():
+            state_obj.charge_total = 0.0
+            state_obj.last_reset = date.today()
+        elif last_state is not None:
             try:
                 state_obj.charge_total = float(last_state.state)
             except ValueError:
-                pass
+                state_obj.charge_total = 0.0
 
     @property
     def native_value(self):
         state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
         return round(state_obj.charge_total, 3)
 
+
 class EpCubeBatteryDischargeSensor(CoordinatorEntity, RestoreEntity, SensorEntity):
     def __init__(self, coordinator):
         super().__init__(coordinator)
         self._attr_unique_id = "epcube_battery_energy_out"
         self._attr_name = "Battery Energy Out"
-        self._attr_device_class = SensorDeviceClass.ENERGY
-        self._attr_state_class = SensorStateClass.TOTAL_INCREASING
+        self._attr_device_class = None
+        self._attr_state_class = SensorStateClass.MEASUREMENT
         self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
         self._attr_device_info = {
             "identifiers": {("epcube", "epcube_device")},
@@ -394,13 +398,17 @@ class EpCubeBatteryDischargeSensor(CoordinatorEntity, RestoreEntity, SensorEntit
 
     async def async_added_to_hass(self):
         await super().async_added_to_hass()
-        last_state = await self.async_get_last_state()
         state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
-        if last_state is not None and getattr(state_obj, "discharge_total", 0) == 0:
+        last_state = await self.async_get_last_state()
+
+        if state_obj.last_reset != date.today():
+            state_obj.discharge_total = 0.0
+            state_obj.last_reset = date.today()
+        elif last_state is not None:
             try:
                 state_obj.discharge_total = float(last_state.state)
             except ValueError:
-                pass
+                state_obj.discharge_total = 0.0
 
     @property
     def native_value(self):
