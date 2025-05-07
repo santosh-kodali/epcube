@@ -283,6 +283,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
         EpCubeBatteryDischargeSensor(coordinator),
         EpCubeBatteryDailyChargeSensor(coordinator),
         EpCubeBatteryDailyDischargeSensor(coordinator),
+        EpCubeBatteryPowerSensor(coordinator),
     ]
 
     registry = async_get(hass)
@@ -489,3 +490,33 @@ class EpCubeBatteryDailyDischargeSensor(CoordinatorEntity, RestoreEntity, Sensor
         state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
         return round(state_obj.daily_out, 3)
 
+class EpCubeBatteryPowerSensor(CoordinatorEntity, SensorEntity):
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self._attr_unique_id = "epcube_battery_power"
+        self._attr_name = "Battery Power (Live)"
+        self._attr_device_class = SensorDeviceClass.POWER
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_native_unit_of_measurement = UnitOfPower.KILO_WATT
+        self._attr_device_info = {
+            "identifiers": {("epcube", "epcube_device")},
+            "name": "EPCUBE",
+            "manufacturer": "CanadianSolar",
+            "model": "EPCUBE",
+        }
+
+    @property
+    def native_value(self):
+        data = self.coordinator.data.get("data", {})
+
+        produzione = data.get("solarpower")
+        consumo = data.get("backuppower")
+        rete = data.get("gridtotalpower")
+
+        if produzione is None or consumo is None or rete is None:
+            return None
+
+        power_kw = ((produzione * 10) - (consumo * 10) - (rete * 10)) / 1000
+        value = round(power_kw, 3)
+
+        return 0.0 if abs(value) < 0.01 else value
