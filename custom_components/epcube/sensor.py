@@ -98,9 +98,15 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
         #power (i numeri arrivano in watt) = W
         
         if "electricity" in base_key:
-            device_class = SensorDeviceClass.ENERGY
             unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
+            device_class = SensorDeviceClass.ENERGY
             state_class = SensorStateClass.TOTAL_INCREASING
+            
+            if 'battery' in base_key:
+                device_class = None
+                state_class = SensorStateClass.MEASUREMENT
+
+            
         elif "flow" in base_key or "power" in base_key:
             device_class = SensorDeviceClass.POWER
             unit_of_measurement = UnitOfPower.WATT
@@ -275,6 +281,8 @@ async def async_setup_entry(hass, entry, async_add_entities):
         EpCubeLastUpdateSensor(coordinator),
         EpCubeBatteryChargeSensor(coordinator),
         EpCubeBatteryDischargeSensor(coordinator),
+        EpCubeBatteryDailyChargeSensor(coordinator),
+        EpCubeBatteryDailyDischargeSensor(coordinator),
     ]
 
     registry = async_get(hass)
@@ -346,13 +354,14 @@ class EpCubeLastUpdateSensor(CoordinatorEntity, SensorEntity):
     def native_value(self):
         return dt_util.utcnow()
 
+# Cumulativo totale: energia caricata nella batteria
 class EpCubeBatteryChargeSensor(CoordinatorEntity, RestoreEntity, SensorEntity):
     def __init__(self, coordinator):
         super().__init__(coordinator)
         self._attr_unique_id = "epcube_battery_energy_in"
         self._attr_name = "Battery Energy In"
-        self._attr_device_class = None
-        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_device_class = SensorDeviceClass.ENERGY
+        self._attr_state_class = SensorStateClass.TOTAL_INCREASING
         self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
         self._attr_device_info = {
             "identifiers": {("epcube", "epcube_device")},
@@ -363,29 +372,58 @@ class EpCubeBatteryChargeSensor(CoordinatorEntity, RestoreEntity, SensorEntity):
 
     async def async_added_to_hass(self):
         await super().async_added_to_hass()
-        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
         last_state = await self.async_get_last_state()
-
-        if state_obj.last_reset != date.today():
-            state_obj.charge_total = 0.0
-            state_obj.last_reset = date.today()
-        elif last_state is not None:
+        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
+        if last_state is not None:
             try:
-                state_obj.charge_total = float(last_state.state)
+                state_obj.total_in = float(last_state.state)
             except ValueError:
-                state_obj.charge_total = 0.0
+                pass
 
     @property
     def native_value(self):
         state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
-        return round(state_obj.charge_total, 3)
+        return round(state_obj.total_in, 3)
 
 
+# Cumulativo totale: energia scaricata dalla batteria
 class EpCubeBatteryDischargeSensor(CoordinatorEntity, RestoreEntity, SensorEntity):
     def __init__(self, coordinator):
         super().__init__(coordinator)
         self._attr_unique_id = "epcube_battery_energy_out"
         self._attr_name = "Battery Energy Out"
+        self._attr_device_class = SensorDeviceClass.ENERGY
+        self._attr_state_class = SensorStateClass.TOTAL_INCREASING
+        self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
+        self._attr_device_info = {
+            "identifiers": {("epcube", "epcube_device")},
+            "name": "EPCUBE",
+            "manufacturer": "CanadianSolar",
+            "model": "EPCUBE",
+        }
+
+    async def async_added_to_hass(self):
+        await super().async_added_to_hass()
+        last_state = await self.async_get_last_state()
+        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
+        if last_state is not None:
+            try:
+                state_obj.total_out = float(last_state.state)
+            except ValueError:
+                pass
+
+    @property
+    def native_value(self):
+        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
+        return round(state_obj.total_out, 3)
+
+
+# Giornaliero: carica accumulata oggi
+class EpCubeBatteryDailyChargeSensor(CoordinatorEntity, RestoreEntity, SensorEntity):
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self._attr_unique_id = "epcube_battery_daily_charge"
+        self._attr_name = "Battery Daily Charge"
         self._attr_device_class = None
         self._attr_state_class = SensorStateClass.MEASUREMENT
         self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
@@ -398,19 +436,56 @@ class EpCubeBatteryDischargeSensor(CoordinatorEntity, RestoreEntity, SensorEntit
 
     async def async_added_to_hass(self):
         await super().async_added_to_hass()
-        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
         last_state = await self.async_get_last_state()
+        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
 
         if state_obj.last_reset != date.today():
-            state_obj.discharge_total = 0.0
+            state_obj.daily_in = 0.0
             state_obj.last_reset = date.today()
         elif last_state is not None:
             try:
-                state_obj.discharge_total = float(last_state.state)
+                state_obj.daily_in = float(last_state.state)
             except ValueError:
-                state_obj.discharge_total = 0.0
+                state_obj.daily_in = 0.0
 
     @property
     def native_value(self):
         state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
-        return round(state_obj.discharge_total, 3)
+        return round(state_obj.daily_in, 3)
+
+
+# Giornaliero: scarica erogata oggi
+class EpCubeBatteryDailyDischargeSensor(CoordinatorEntity, RestoreEntity, SensorEntity):
+    def __init__(self, coordinator):
+        super().__init__(coordinator)
+        self._attr_unique_id = "epcube_battery_daily_discharge"
+        self._attr_name = "Battery Daily Discharge"
+        self._attr_device_class = None
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
+        self._attr_device_info = {
+            "identifiers": {("epcube", "epcube_device")},
+            "name": "EPCUBE",
+            "manufacturer": "CanadianSolar",
+            "model": "EPCUBE",
+        }
+
+    async def async_added_to_hass(self):
+        await super().async_added_to_hass()
+        last_state = await self.async_get_last_state()
+        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
+
+        if state_obj.last_reset != date.today():
+            state_obj.daily_out = 0.0
+            state_obj.last_reset = date.today()
+        elif last_state is not None:
+            try:
+                state_obj.daily_out = float(last_state.state)
+            except ValueError:
+                state_obj.daily_out = 0.0
+
+    @property
+    def native_value(self):
+        state_obj = self.coordinator.hass.data[DOMAIN][self.coordinator.config_entry.entry_id]["state"]
+        return round(state_obj.daily_out, 3)
+
