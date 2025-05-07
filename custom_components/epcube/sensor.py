@@ -424,8 +424,8 @@ class EpCubeBatteryDailyChargeSensor(CoordinatorEntity, RestoreEntity, SensorEnt
         super().__init__(coordinator)
         self._attr_unique_id = "epcube_battery_daily_charge"
         self._attr_name = "Battery Daily Charge"
-        self._attr_device_class = None
-        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_device_class = SensorDeviceClass.ENERGY
+        self._attr_state_class = SensorStateClass.TOTAL
         self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
         self._attr_device_info = {
             "identifiers": {("epcube", "epcube_device")},
@@ -460,8 +460,8 @@ class EpCubeBatteryDailyDischargeSensor(CoordinatorEntity, RestoreEntity, Sensor
         super().__init__(coordinator)
         self._attr_unique_id = "epcube_battery_daily_discharge"
         self._attr_name = "Battery Daily Discharge"
-        self._attr_device_class = None
-        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_device_class = SensorDeviceClass.ENERGY
+        self._attr_state_class = SensorStateClass.TOTAL
         self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
         self._attr_device_info = {
             "identifiers": {("epcube", "epcube_device")},
