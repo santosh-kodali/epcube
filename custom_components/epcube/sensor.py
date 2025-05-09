@@ -508,7 +508,7 @@ class EpCubeBatteryPowerSensor(CoordinatorEntity, SensorEntity):
     @property
     def native_value(self):
         data = self.coordinator.data.get("data", {})
-
+        
         produzione = data.get("solarpower")
         consumo = data.get("backuppower")
         rete = data.get("gridtotalpower")
@@ -516,7 +516,12 @@ class EpCubeBatteryPowerSensor(CoordinatorEntity, SensorEntity):
         if produzione is None or consumo is None or rete is None:
             return None
 
-        power_kw = ((produzione * 10) - (consumo * 10) - (rete * 10)) / 1000
+        power_kw = 10 * (produzione - consumo - abs(rete)) / 1000
         value = round(power_kw, 3)
 
-        return 0.0 if abs(value) < 0.01 else value
+        _LOGGER.debug(
+            "[EPCube BatteryPower] Produzione: %.1f W | Consumo: %.1f W | Grid: %.1f W → Batteria: %.3f kW",
+            produzione * 10, consumo * 10, rete * 10, value
+        )
+
+        return value
