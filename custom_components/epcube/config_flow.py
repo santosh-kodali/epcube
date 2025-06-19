@@ -48,7 +48,7 @@ class EpCubeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     async def _get_sn_from_token(self, token):
-        url = "https://monitoring-eu.epcube.com/api/user/user/base"
+        url = "https://monitoring-us.epcube.com/api/user/user/base"
         headers = {
             "accept": "*/*",
             "accept-language": "it-IT",

@@ -19,7 +19,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     scan_interval = entry.options.get("scan_interval", DEFAULT_SCAN_INTERVAL)
 
     session = async_get_clientsession(hass)
-    url = f"https://monitoring-eu.epcube.com/api/device/homeDeviceInfo?&sgSn={sn}"
+    url = f"https://monitoring-us.epcube.com/api/device/homeDeviceInfo?&sgSn={sn}"
     headers = {
         "accept": "*/*",
         "accept-language": "it-IT",

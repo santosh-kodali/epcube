@@ -42,7 +42,7 @@ class EpCubeDynamicSocNumber(CoordinatorEntity, NumberEntity):
             "manufacturer": "CanadianSolar",
             "model": "EPCUBE",
             "entry_type": "service",
-            "configuration_url": "https://monitoring-eu.epcube.com/"
+            "configuration_url": "https://monitoring-us.epcube.com/"
         }
 
         if coordinator.data and coordinator.data.get("data"):
@@ -93,7 +93,7 @@ class EpCubeDynamicSocNumber(CoordinatorEntity, NumberEntity):
         await self._post_switch_mode(payload)
 
     async def _post_switch_mode(self, payload):
-        url = "https://monitoring-eu.epcube.com/api/device/switchMode"
+        url = "https://monitoring-us.epcube.com/api/device/switchMode"
         headers = {
             "Content-Type": "application/json",
             "Authorization": self.entry.data.get("token"),
@@ -136,7 +136,7 @@ class EpCubeStaticSocNumber(CoordinatorEntity, NumberEntity):
             "manufacturer": "CanadianSolar",
             "model": "EPCUBE",
             "entry_type": "service",
-            "configuration_url": "https://monitoring-eu.epcube.com/"
+            "configuration_url": "https://monitoring-us.epcube.com/"
         }
 
     @property
@@ -163,7 +163,7 @@ class EpCubeStaticSocNumber(CoordinatorEntity, NumberEntity):
         await self._post_switch_mode(payload)
 
     async def _post_switch_mode(self, payload):
-        url = "https://monitoring-eu.epcube.com/api/device/switchMode"
+        url = "https://monitoring-us.epcube.com/api/device/switchMode"
         headers = {
             "Content-Type": "application/json",
             "Authorization": self.entry.data.get("token"),

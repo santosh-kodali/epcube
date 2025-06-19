@@ -161,7 +161,7 @@ def generate_sensors(data, enable_total=False, enable_annual=False, enable_month
     return sensors
 
 async def fetch_device_info(session, token, dev_id):
-    url = f"https://monitoring-eu.epcube.com/api/device/userDeviceInfo?devId={dev_id}"
+    url = f"https://monitoring-us.epcube.com/api/device/userDeviceInfo?devId={dev_id}"
     headers = {
         "accept": "*/*",
         "accept-language": "it-IT",
@@ -177,7 +177,7 @@ async def fetch_device_info(session, token, dev_id):
         return normalized
 
 async def fetch_epcube_stats(session, token, dev_id, date_str, scope_type):
-    url = f"https://monitoring-eu.epcube.com/api/device/queryDataElectricityV2?devId={dev_id}&queryDateStr={date_str}&scopeType={scope_type}"
+    url = f"https://monitoring-us.epcube.com/api/device/queryDataElectricityV2?devId={dev_id}&queryDateStr={date_str}&scopeType={scope_type}"
     headers = {
         "accept": "*/*",
         "accept-language": "it-IT",
@@ -216,7 +216,7 @@ async def async_update_data_with_stats(session, url, headers, dev_id_sn, token, 
 
                 device_info = await fetch_device_info(session, token, real_dev_id)
 
-                switch_url = f"https://monitoring-eu.epcube.com/api/device/getSwitchMode?devId={real_dev_id}"
+                switch_url = f"https://monitoring-us.epcube.com/api/device/getSwitchMode?devId={real_dev_id}"
                 async with session.get(switch_url, headers=headers) as switch_resp:
                     switch_json = await switch_resp.json()
                     switch_data = switch_json.get("data", {})
@@ -327,7 +327,7 @@ class EpCubeSensor(CoordinatorEntity, SensorEntity):
             "manufacturer": "CanadianSolar",
             "model": "EPCUBE",
             "entry_type": "service",
-            "configuration_url": "https://monitoring-eu.epcube.com/"
+            "configuration_url": "https://monitoring-us.epcube.com/"
         }
 
     @property

@@ -69,7 +69,7 @@ class EpCubeModeSelect(CoordinatorEntity, SelectEntity):
         await self._post_switch_mode(payload)
 
     async def _post_switch_mode(self, payload):
-        url = "https://monitoring-eu.epcube.com/api/device/switchMode"
+        url = "https://monitoring-us.epcube.com/api/device/switchMode"
         headers = {
             "accept": "*/*",
             "content-type": "application/json",
