@@ -1,12 +1,12 @@
 {
   "domain": "epcube",
   "name": "EP CUBE Energy Monitor",
-  "codeowners": ["@Bobsilvio"],
+  "codeowners": ["@santosh-kodali"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/Bobsilvio/epcube/",
+  "documentation": "https://github.com/santosh-kodali/epcube/",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/Bobsilvio/epcube/issues",
+  "issue_tracker": "https://github.com/santosh-kodali/epcube/issues",
   "loggers": ["epcube"],
   "requirements": [],
   "version": "1.1.2"

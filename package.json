@@ -10,8 +10,8 @@
     "integration"
   ],
   "main": "sensor.py",
-  "repository": "git@github.com:bobsilvio/epcube.git",
-  "author": "Bobsilvio <@gmail.com>",
+  "repository": "git@github.com:santosh-kodali/epcube.git",
+  "author": "santosh-kodali <@gmail.com>",
   "license": "MIT",
   "dependencies": {}
 }
